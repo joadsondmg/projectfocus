@@ -35,15 +35,22 @@ login() {
 
 showPassword() {
   const password = document.getElementById('password') as HTMLInputElement
+  const eyeImg = document.getElementById('show-pass') as HTMLImageElement
   if(password.type === "text"){
     password.type = "password"
+    eyeImg.src = "./../../assets/eye_off.png"
   } else {
     password.type = "text"
+    eyeImg.src = "./../../assets/eye_on.png"
   }
 }
 
 forgotPassword() {
   alert('Método indisponível')
+}
+
+redirectHome() {
+  this.route.navigate(['home'])
 }
 
 ngOnInit(): void{

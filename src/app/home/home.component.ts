@@ -11,6 +11,10 @@ export class HomeComponent implements OnInit {
     private route: Router
   ) { }
 
+  loginRedirect() {
+    this.route.navigate(['login'])
+  }
+
   ngOnInit(): void {
     if(localStorage.getItem('access-token')){
     this.route.navigate(['info'])

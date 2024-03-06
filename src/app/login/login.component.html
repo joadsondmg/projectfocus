@@ -1,22 +1,25 @@
 <div class="main-container">
-    <div class="header"></div>
-    <div class="login-container">
-        <div class="input-field">
-            <label for="user">Usuário</label>
-            <div class="input-content">
-                <input type="text" id="user" [(ngModel)]="userData.user" (keyup.enter)="login()">
+    <div class="header">
+        <img src="./../../assets/vale-logo-branco.png" alt="" (click)="redirectHome()">
+    </div>
+    <div class="secound-container">
+        <div class="login-container">
+            <span>LOGIN</span>
+            <div class="input-field">
+                <label for="user">Usuário</label>
+                <div class="input-content">
+                    <input type="text" id="user" [(ngModel)]="userData.user" (keyup.enter)="login()">
+                </div>
             </div>
-        </div>
-        <div class="input-field">
-            <label for="password">Senha</label>
-            <div class="input-content">
-                <input type="password" id="password" [(ngModel)]="userData.password" (keyup.enter)="login()">
-                <input type="checkbox" (click)="showPassword()">
+            <div class="input-field">
+                <label for="password">Senha</label>
+                <div class="input-content">
+                    <input type="password" id="password" [(ngModel)]="userData.password" (keyup.enter)="login()">
+                    <img src="./../../assets/eye_on.png" id="show-pass" alt="" (click)="showPassword()">
+                    <span (click)="forgotPassword()">Esqueceu sua senha?</span>
+                </div>
             </div>
+            <button (click)="login()">Entrar</button>
         </div>
-        <div class="login-options">
-            <span (click)="forgotPassword()">Esqueceu sua senha?</span>
-        </div>
-        <button (click)="login()">Entrar</button>
     </div>
 </div>

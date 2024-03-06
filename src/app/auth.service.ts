@@ -21,6 +21,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('acess-token')
+    localStorage.removeItem('access-token')
   }
 }
