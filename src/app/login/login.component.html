@@ -1,0 +1,22 @@
+<div class="main-container">
+    <div class="header"></div>
+    <div class="login-container">
+        <div class="input-field">
+            <label for="user">Usuário</label>
+            <div class="input-content">
+                <input type="text" id="user" [(ngModel)]="userData.user" (keyup.enter)="login()">
+            </div>
+        </div>
+        <div class="input-field">
+            <label for="password">Senha</label>
+            <div class="input-content">
+                <input type="password" id="password" [(ngModel)]="userData.password" (keyup.enter)="login()">
+                <input type="checkbox" (click)="showPassword()">
+            </div>
+        </div>
+        <div class="login-options">
+            <span (click)="forgotPassword()">Esqueceu sua senha?</span>
+        </div>
+        <button (click)="login()">Entrar</button>
+    </div>
+</div>
