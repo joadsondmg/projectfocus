@@ -1,4 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exame',
@@ -6,6 +7,9 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./exame.component.scss']
 })
 export class ExameComponent implements OnInit, OnDestroy{
+  constructor(
+    private route: Router
+  ){}
 
   private createObjects: any;
 
@@ -16,6 +20,8 @@ export class ExameComponent implements OnInit, OnDestroy{
   totalObjects = 10
   countObjects = 0
   currentObject: any = ""
+  responseText = "TESTANDO"
+  responseImage = "./../../assets/triangulo.png"
 
   resultObject = [
     {
@@ -49,15 +55,15 @@ randomObjectCreate() {
 		}
 
     if (this.countObjects < this.totalObjects) {
-			var positionX = Math.floor(Math.random() * this.width) - 90
-			var positionY = Math.floor(Math.random() * this.height) - 90
+			let positionX = Math.floor(Math.random() * this.width) - 90
+			let positionY = Math.floor(Math.random() * this.height) - 90
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
-			var triangle = document.createElement('img')
-			var orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
-			var rotate = orientation[Math.floor(Math.random() * orientation.length)]
-			var fill = ['/triangulo_vazado.png', '/triangulo.png']
-			var selectFill = Math.floor(Math.random() * 2)
+			const triangle = document.createElement('img')
+			const orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
+			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
+			const fill = ['/triangulo_vazado.png', '/triangulo.png']
+			const selectFill = Math.floor(Math.random() * 2)
 			triangle.src = "./../../assets" + fill[selectFill]
 			triangle.style.transform = rotate
 			if( fill[selectFill] == this.currentObject.fill && rotate == this.currentObject.rotate ){
@@ -78,15 +84,37 @@ randomObjectCreate() {
 }
 
 score() {
-  var score = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
+  const score = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
   console.log(this.actionHit + ' ' + this.omissionHit + ' ' + score)
+  const stage = document.getElementById('stage')
+  if (stage) {
+    stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+       <h2 style="color: white">${this.responseText}</h2>
+       <img style="width: 3rem" src="${this.responseImage}" alt="">
+       <button style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--btn-default-color); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--aux-purple);" (click)="redirectInfo()" class="action-btn">INÍCIO</button>
+    </div>`;
+   }
+  // const resultText = document.createElement('h2')
+  // const resultImage = document.createElement('img')
+  // const exitBtn = document.createElement('button')
+  // exitBtn.addEventListener('click', this.redirectInfo)
+  // exitBtn.textContent = 'INÍCIO'
+  // exitBtn.classList.add('action-btn')
+  // resultImage.src = './../../assets/triangulo.png'
+  // resultImage.style.width =  '15rem'
+  // resultText.innerText = 'TESTANDO'
+  // resultText.style.color = 'white'
+  // stage?.classList.add('result-styles')
+  // stage?.appendChild(resultText)
+  // stage?.appendChild(resultImage)
+  // stage?.appendChild(exitBtn)
 //   // console.log("Sua pontuação final foi:" + pontuacao + "%");
 // window.location.href = 'resultado.html?' + score; // Redireciona para a página de fim de jogo
 }
 
 @HostListener('document:keydown.space', ['$event'])
 handleSpaceKey(event: KeyboardEvent): void {
-  var triangle = document.getElementsByTagName('img')[0] ? document.getElementsByTagName('img')[0] : null;
+  const triangle = document.getElementsByTagName('img')[0] ? document.getElementsByTagName('img')[0] : null;
   if(event.code === "Space"){
     if(triangle) {
       if(triangle.id === "triangulo") {
@@ -96,6 +124,10 @@ handleSpaceKey(event: KeyboardEvent): void {
       triangle.remove()
     }
   }
+}
+
+redirectInfo() {
+  this.route.navigate(['info'])
 }
 
 ngOnInit(): void {
