@@ -20,11 +20,12 @@ if(isset($user)) {
         'iss' => 'focus',
         'sub' => $user['id'],
         'user' => $user['user'],
+        'name' => $user['name'],
         'email' => $user['email'],
         'role' => $user['role'],
         'result' => $user['result'],
         'iat' => time(),
-        'exp' => time() + 20
+        'exp' => time() + 5
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success','token' => $token]);
