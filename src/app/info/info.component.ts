@@ -18,11 +18,11 @@ constructor(
 {}
 
 username = 'teste'
-preenchimento = ['/triangulo_vazado.png', '/triangulo.png']
+fill = ['/triangulo_vazado.png', '/triangulo.png']
 rotate = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)']
 
 currentObject = {
-  preenchimento: this.preenchimento[Math.floor(Math.random() * this.preenchimento.length)],
+  fill: this.fill[Math.floor(Math.random() * this.fill.length)],
   rotate: this.rotate[Math.floor(Math.random() * this.rotate.length)]
 };
 
@@ -43,42 +43,42 @@ redirectExam() {
 
 generateCurrentObject() {
   const randomImg =  document.getElementById('random-img') as HTMLImageElement
-  localStorage.setItem('currentObject', JSON.stringify(this.currentObject))
-  randomImg.src = "./../../assets/" + this.currentObject.preenchimento
+  localStorage.setItem('current-object', JSON.stringify(this.currentObject))
+  randomImg.src = "./../../assets/" + this.currentObject.fill
   randomImg.style.transform = this.currentObject.rotate
 }
 
-getUserData() {
-  const storedToken = localStorage.getItem('access-token')
-  if(storedToken){
-    const token = storedToken
-    this.data.getUserData(token).subscribe(
-      (response) => {
-        const userData = response.data
-        if(userData){
-          const exp = parseInt(userData.exp) * 1000
-          console.log(exp)
-          if(Date.now() > exp){
-            localStorage.removeItem('access-token');
-            window.location.reload()
-          } else {
-            const fullName = userData.name.split(" ")
-            const firstName = fullName[0]
-            const lastName = fullName[fullName.length - 1]
-            this.username = firstName + " " + lastName
-          }
-        } else {
-          alert('Erro')
-        }
+// getUserData() {
+//   const storedToken = localStorage.getItem('access-token')
+//   if(storedToken){
+//     const token = storedToken
+//     this.data.getUserData(token).subscribe(
+//       (response) => {
+//         const userData = response.data
+//         if(userData){
+//           const exp = parseInt(userData.exp) * 1000
+//           console.log(exp)
+//           if(Date.now() > exp){
+//             localStorage.removeItem('access-token');
+//             window.location.reload()
+//           } else {
+//             const fullName = userData.name.split(" ")
+//             const firstName = fullName[0]
+//             const lastName = fullName[fullName.length - 1]
+//             this.username = firstName + " " + lastName
+//           }
+//         } else {
+//           alert('Erro')
+//         }
        
         
-      }
-    )
-  }
-}
+//       }
+//     )
+//   }
+// }
 
 ngOnInit(): void {
   this.generateCurrentObject()
-  this.getUserData()
+  // this.getUserData()
 }
 }

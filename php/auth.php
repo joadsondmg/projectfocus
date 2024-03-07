@@ -25,7 +25,7 @@ if(isset($user)) {
         'role' => $user['role'],
         'result' => $user['result'],
         'iat' => time(),
-        'exp' => time() + 5
+        'exp' => time() + 86400
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success','token' => $token]);

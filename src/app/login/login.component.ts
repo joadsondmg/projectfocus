@@ -21,6 +21,7 @@ userData = {
 }
 
 login() {
+  const senha = document.getElementById('password') as HTMLInputElement
   this.auth.login(this.userData).subscribe({
     next: (response) => {
       if(response) {
@@ -28,6 +29,7 @@ login() {
         this.route.navigate(['info'])
       } else {
         alert('Dados Incorretos')
+        senha.value = ""
       }
     }
   })
