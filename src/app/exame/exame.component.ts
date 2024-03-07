@@ -1,5 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserdataService } from '../userdata.service';
 
 @Component({
   selector: 'app-exame',
@@ -8,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ExameComponent implements OnInit, OnDestroy{
   constructor(
-    private route: Router
+    private route: Router,
+    private userdata: UserdataService
   ){}
 
   private createObjects: any;
@@ -20,23 +22,26 @@ export class ExameComponent implements OnInit, OnDestroy{
   totalObjects = 10
   countObjects = 0
   currentObject: any = ""
-  responseText = "TESTANDO"
-  responseImage = "./../../assets/triangulo.png"
+  responseText = ""
+  responseImage = ""
+  resultResponse = 0
+  idUser = 0
 
   resultObject = [
     {
       responseText: "Você está liberado para suas atividades!",
-      responseImage: ""
+      responseImage: "./../../assets/triangulo.png"
     },
     {
       responseText: "Execução incorreta, gentileza procurar seu supervisor!",
-      responseImage: ""
+      responseImage: "./../../assets/triangulo.png"
     },
     {
       responseText: "Execução não foi como esperada, gentileza procurar medicina!",
-      responseImage: ""
+      responseImage: "./../../assets/triangulo.png"
     }
 ]
+
 resizeStage() {
   this.height = window.innerHeight
   this.width = window.innerWidth
@@ -86,30 +91,51 @@ randomObjectCreate() {
 score() {
   const score = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
   console.log(this.actionHit + ' ' + this.omissionHit + ' ' + score)
+  this.resultResponse = score
+  switch(true){
+    case score >= 70:
+      this.responseText = this.resultObject[0].responseText
+      this.responseImage = this.resultObject[0].responseImage
+      break;
+    case score >= 50:
+      this.responseText = this.resultObject[1].responseText
+      this.responseImage = this.resultObject[1].responseImage
+      break;
+    default:
+      this.responseText = this.resultObject[2].responseText
+      this.responseImage = this.resultObject[2].responseImage
+  }
   const stage = document.getElementById('stage')
   if (stage) {
     stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
        <h2 style="color: white">${this.responseText}</h2>
        <img style="width: 3rem" src="${this.responseImage}" alt="">
-       <button style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--btn-default-color); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--aux-purple);" (click)="redirectInfo()" class="action-btn">INÍCIO</button>
+       <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--btn-default-color); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--aux-purple);" class="action-btn">INÍCIO</button>
     </div>`;
    }
-  // const resultText = document.createElement('h2')
-  // const resultImage = document.createElement('img')
-  // const exitBtn = document.createElement('button')
-  // exitBtn.addEventListener('click', this.redirectInfo)
-  // exitBtn.textContent = 'INÍCIO'
-  // exitBtn.classList.add('action-btn')
-  // resultImage.src = './../../assets/triangulo.png'
-  // resultImage.style.width =  '15rem'
-  // resultText.innerText = 'TESTANDO'
-  // resultText.style.color = 'white'
-  // stage?.classList.add('result-styles')
-  // stage?.appendChild(resultText)
-  // stage?.appendChild(resultImage)
-  // stage?.appendChild(exitBtn)
-//   // console.log("Sua pontuação final foi:" + pontuacao + "%");
-// window.location.href = 'resultado.html?' + score; // Redireciona para a página de fim de jogo
+   const actionBtn = document.getElementById('action-btn')
+   if(actionBtn) {
+    actionBtn.addEventListener('click', () => {
+      this.route.navigate(['info'])
+    })
+   }
+}
+
+storeResultResponse(){
+  const storedToken = localStorage.getItem('access-token')
+  if(storedToken) {
+    this.userdata.getUserData(storedToken).subscribe(
+      (response) => {
+        const userData = response.data
+        if(userData) {
+          this.idUser = userData.id
+        } else {
+          alert("Erro ao recuperar ID")
+        }
+      }
+    )
+  }
+  this.userdata.setResultResponse(this.idUser, this.resultResponse)
 }
 
 @HostListener('document:keydown.space', ['$event'])
