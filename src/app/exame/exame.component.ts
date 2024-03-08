@@ -1,6 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from '../userdata.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-exame',
@@ -10,7 +11,7 @@ import { UserdataService } from '../userdata.service';
 export class ExameComponent implements OnInit, OnDestroy{
   constructor(
     private route: Router,
-    private userdata: UserdataService
+    private data: UserdataService
   ){}
 
   private createObjects: any;
@@ -19,26 +20,37 @@ export class ExameComponent implements OnInit, OnDestroy{
   width = 0
   actionHit = 0
   omissionHit = 0
-  totalObjects = 10
+  totalObjects = 30
   countObjects = 0
   currentObject: any = ""
   responseText = ""
   responseImage = ""
   resultResponse = 0
-  idUser = 0
+  idUser = 1
+  validate = true
+
+  currentDate = new Date()
+  day = this.currentDate.getDate().toString().padStart(2, '0')
+  month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
+  year = this.currentDate.getFullYear()
+  todayDate = this.day + "/" + this.month + "/" + this.year;
 
   resultObject = [
     {
       responseText: "Você está liberado para suas atividades!",
-      responseImage: "./../../assets/triangulo.png"
+      responseImage: "./../../assets/colaboradores.png"
     },
     {
       responseText: "Execução incorreta, gentileza procurar seu supervisor!",
-      responseImage: "./../../assets/triangulo.png"
+      responseImage: "./../../assets/supervisor.png"
     },
     {
       responseText: "Execução não foi como esperada, gentileza procurar medicina!",
-      responseImage: "./../../assets/triangulo.png"
+      responseImage: "./../../assets/medico.png"
+    },
+    {
+      responseText: "Você já esgotou o número de tentativas hoje!",
+      responseImage: "./../../assets/erro.png"
     }
 ]
 
@@ -89,15 +101,15 @@ randomObjectCreate() {
 }
 
 score() {
-  const score = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
-  console.log(this.actionHit + ' ' + this.omissionHit + ' ' + score)
-  this.resultResponse = score
+  const scoreValue = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
+  console.log(this.actionHit + ' ' + this.omissionHit + ' ' + scoreValue)
+  this.resultResponse = scoreValue
   switch(true){
-    case score >= 70:
+    case scoreValue >= 70:
       this.responseText = this.resultObject[0].responseText
       this.responseImage = this.resultObject[0].responseImage
       break;
-    case score >= 50:
+    case scoreValue >= 50:
       this.responseText = this.resultObject[1].responseText
       this.responseImage = this.resultObject[1].responseImage
       break;
@@ -109,7 +121,7 @@ score() {
   if (stage) {
     stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
        <h2 style="color: white">${this.responseText}</h2>
-       <img style="width: 3rem" src="${this.responseImage}" alt="">
+       <img style="width: 19rem" src="${this.responseImage}" alt="">
        <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--aux-purple); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--default-text-color);" class="action-btn">INÍCIO</button>
     </div>`;
    }
@@ -119,23 +131,7 @@ score() {
       this.route.navigate(['info'])
     })
    }
-}
-
-storeResultResponse(){
-  const storedToken = sessionStorage.getItem('access-token')
-  if(storedToken) {
-    this.userdata.getUserData(storedToken).subscribe(
-      (response) => {
-        const userData = response.data
-        if(userData) {
-          this.idUser = userData.id
-        } else {
-          alert("Erro ao recuperar ID")
-        }
-      }
-    )
-  }
-  this.userdata.setResultResponse(this.idUser, this.resultResponse)
+   this.storeResultResponse(scoreValue)
 }
 
 @HostListener('document:keydown.space', ['$event'])
@@ -145,7 +141,6 @@ handleSpaceKey(event: KeyboardEvent): void {
     if(triangle) {
       if(triangle.id === "triangulo") {
         this.actionHit++
-        console.log(this.actionHit)
       }
       triangle.remove()
     }
@@ -156,20 +151,68 @@ redirectInfo() {
   this.route.navigate(['info'])
 }
 
+storeResultResponse(result: number){
+  this.data.setResultResponse(this.idUser, result).subscribe(
+    (response: any) => {
+      console.log(response)
+    }
+  )           
+}
+
+
+validExecution() {
+  const storedToken = sessionStorage.getItem('access-token')
+  if(storedToken){
+    this.data.getUserData(storedToken).subscribe(
+      (response) => {
+          const userData = response.data
+            if(userData) {
+              this.data.getValidExecutation(this.todayDate, userData.sub).subscribe(
+                (resp: any) => {
+                  if(resp.status === 'denied'){
+                    this.responseText = this.resultObject[3].responseText
+                    this.responseImage = this.resultObject[3].responseImage
+                    const stage = document.getElementById('stage')
+                    if (stage) {
+                      stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+                        <h2 style="color: white">${this.responseText}</h2>
+                        <img style="width: 19rem" src="${this.responseImage}" alt="">
+                        <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--aux-purple); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--default-text-color);" class="action-btn">INÍCIO</button>
+                      </div>`;
+                    }
+                    const actionBtn = document.getElementById('action-btn')
+                    if(actionBtn) {
+                      actionBtn.addEventListener('click', () => {
+                        this.route.navigate(['info'])
+                      })
+                    }
+                  } else {
+                    const storedObject = sessionStorage.getItem('current-object')
+                    if(storedObject){
+                      this.currentObject = JSON.parse(storedObject)
+                    }
+                    this.createObjects = setInterval(() =>{
+                      if(this.countObjects <= this.totalObjects){
+                        this.randomObjectCreate()
+                    } else {
+                      clearInterval(this.createObjects)
+                      this.score()
+                    }
+                    }, 600)
+                  }
+                }
+              )
+            }
+          }
+    )
+  }
+  
+}
+
 ngOnInit(): void {
   this.resizeStage()
-  const storedObject = sessionStorage.getItem('current-object')
-  if(storedObject){
-    this.currentObject = JSON.parse(storedObject)
-  }
-  this.createObjects = setInterval(() =>{
-    if(this.countObjects <= this.totalObjects){
-      this.randomObjectCreate()
-   } else {
-    clearInterval(this.createObjects)
-    this.score()
-   }
-  }, 1000)
+  this.validExecution()
+
 }
 
 ngOnDestroy(): void {

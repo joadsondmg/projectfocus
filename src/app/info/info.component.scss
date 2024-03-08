@@ -54,6 +54,10 @@
     }
     p:last-child {
         font-size: 1.5rem;
+        span {
+            font-weight: bold;
+            color: var(--aux-purple-secondary);
+        }
     }
 }
 .gif-content {

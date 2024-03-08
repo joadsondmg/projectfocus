@@ -11,22 +11,37 @@ export class UserdataService {
     private http: HttpClient
   ) { }
 
-  apiGet = 'http://localhost/projectfocus/php/user-data.php'
+  apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
+  apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
   apiSet = 'http://localhost/projectfocus/php/set-result.php'
-
+  
   getUserData(token: string): Observable<any> {
     const data = { 
       'token' : token 
     };
-    return this.http.post<any>(this.apiGet, data);
+    return this.http.post<any>(this.apiGetUser, data);
   }
 
-  setResultResponse(id: number, result: number) {
+  setResultResponse(id: any, result: any): Observable<any>{
+    const currentDate = new Date()
+    const day = currentDate.getDate().toString().padStart(2, '0')
+    const month = (currentDate.getMonth()+1).toString().padStart(2, '0')
+    const year = currentDate.getFullYear()
+    const todayDate = day + "/" + month + "/" + year;
     const data = { 
-      'id' : id,
-      'result': result
+      'id_user' : id,
+      'result': result,
+      'today_date': todayDate
     };
-    this.http.post(this.apiSet, data)
+    return this.http.post(this.apiSet, data)
+  }
+
+  getValidExecutation(date: any, id_user: any): Observable<any> {
+    const data = {
+      'id_user' : id_user,
+      'today_date' : date
+    }
+    return this.http.post(this.apiGetResult, data)
   }
 
 }
