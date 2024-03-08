@@ -11,7 +11,7 @@ export class AuthService {
   api = 'http://localhost/projectfocus/php/auth.php'
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('access-token')
+    return !!sessionStorage.getItem('access-token')
   }
 
   login(userData: object): Observable<string> {
@@ -21,6 +21,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access-token')
+    sessionStorage.removeItem('access-token')
   }
 }

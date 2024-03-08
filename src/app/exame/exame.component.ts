@@ -110,7 +110,7 @@ score() {
     stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
        <h2 style="color: white">${this.responseText}</h2>
        <img style="width: 3rem" src="${this.responseImage}" alt="">
-       <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--btn-default-color); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--aux-purple);" class="action-btn">INÍCIO</button>
+       <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--aux-purple); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--default-text-color);" class="action-btn">INÍCIO</button>
     </div>`;
    }
    const actionBtn = document.getElementById('action-btn')
@@ -122,7 +122,7 @@ score() {
 }
 
 storeResultResponse(){
-  const storedToken = localStorage.getItem('access-token')
+  const storedToken = sessionStorage.getItem('access-token')
   if(storedToken) {
     this.userdata.getUserData(storedToken).subscribe(
       (response) => {
@@ -158,7 +158,7 @@ redirectInfo() {
 
 ngOnInit(): void {
   this.resizeStage()
-  const storedObject = localStorage.getItem('current-object')
+  const storedObject = sessionStorage.getItem('current-object')
   if(storedObject){
     this.currentObject = JSON.parse(storedObject)
   }

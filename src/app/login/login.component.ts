@@ -25,7 +25,7 @@ login() {
   this.auth.login(this.userData).subscribe({
     next: (response) => {
       if(response) {
-        localStorage.setItem('access-token', response)
+        sessionStorage.setItem('access-token', response)
         this.route.navigate(['info'])
       } else {
         alert('Dados Incorretos')
