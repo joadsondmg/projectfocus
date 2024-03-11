@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('access-token')){
+    if(sessionStorage.getItem('access-token')){
     this.route.navigate(['/info'])
     }
   }
