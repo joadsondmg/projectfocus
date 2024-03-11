@@ -26,7 +26,6 @@ export class ExameComponent implements OnInit, OnDestroy{
   responseText = ""
   responseImage = ""
   resultResponse = 0
-  idUser = 0
   validate = true
 
   currentDate = new Date()
@@ -152,7 +151,8 @@ redirectInfo() {
 }
 
 storeResultResponse(result: number){
-  this.data.setResultResponse(this.idUser, result).subscribe(
+
+  this.data.setResultResponse(sessionStorage.getItem('id'), result).subscribe(
     (response: any) => {
       console.log(response)
     }
@@ -161,52 +161,41 @@ storeResultResponse(result: number){
 
 
 validExecution() {
-  const storedToken = sessionStorage.getItem('access-token')
-  if(storedToken){
-    this.data.getUserData(storedToken).subscribe(
-      (response) => {
-          const userData = response.data
-            if(userData) {
-              this.data.getValidExecutation(this.todayDate, userData.sub).subscribe(
-                (resp: any) => {
-                  if(resp.status === 'denied'){
-                    this.responseText = this.resultObject[3].responseText
-                    this.responseImage = this.resultObject[3].responseImage
-                    const stage = document.getElementById('stage')
-                    if (stage) {
-                      stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
-                        <h2 style="color: white">${this.responseText}</h2>
-                        <img style="width: 19rem" src="${this.responseImage}" alt="">
-                        <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--aux-purple); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--default-text-color);" class="action-btn">INÍCIO</button>
-                      </div>`;
-                    }
-                    const actionBtn = document.getElementById('action-btn')
-                    if(actionBtn) {
-                      actionBtn.addEventListener('click', () => {
-                        this.route.navigate(['/info'])
-                      })
-                    }
-                  } else {
-                    const storedObject = sessionStorage.getItem('current-object')
-                    if(storedObject){
-                      this.currentObject = JSON.parse(storedObject)
-                    }
-                    this.createObjects = setInterval(() =>{
-                      if(this.countObjects <= this.totalObjects){
-                        this.randomObjectCreate()
-                    } else {
-                      clearInterval(this.createObjects)
-                      this.score()
-                    }
-                    }, 800)
-                  }
-                }
-              )
-            }
-          }
-    )
-  }
-  
+  this.data.getValidExecutation(this.todayDate, sessionStorage.getItem('id')).subscribe(
+    (resp: any) => {
+      if(resp.status === 'denied'){
+        this.responseText = this.resultObject[3].responseText
+        this.responseImage = this.resultObject[3].responseImage
+        const stage = document.getElementById('stage')
+        if (stage) {
+          stage.innerHTML = `<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+            <h2 style="color: white">${this.responseText}</h2>
+            <img style="width: 19rem" src="${this.responseImage}" alt="">
+            <button id='action-btn' style="border: none; padding: 1rem 3.5rem;margin: 0 2rem 2rem 2rem; background-color: var(--aux-purple); border-radius: 0.7rem; font-weight: 600; cursor: pointer; color: var(--default-text-color);" class="action-btn">INÍCIO</button>
+          </div>`;
+        }
+        const actionBtn = document.getElementById('action-btn')
+        if(actionBtn) {
+          actionBtn.addEventListener('click', () => {
+            this.route.navigate(['/info'])
+          })
+        }
+      } else {
+        const storedObject = sessionStorage.getItem('current-object')
+        if(storedObject){
+          this.currentObject = JSON.parse(storedObject)
+        }
+        this.createObjects = setInterval(() =>{
+          if(this.countObjects <= this.totalObjects){
+            this.randomObjectCreate()
+        } else {
+          clearInterval(this.createObjects)
+          this.score()
+        }
+        }, 800)
+      }
+    }
+  )
 }
 
 ngOnInit(): void {

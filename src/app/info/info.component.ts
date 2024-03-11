@@ -60,6 +60,8 @@ getUserData() {
             const firstName = fullName[0]
             const lastName = fullName[fullName.length - 1]
             this.username = firstName + " " + lastName
+            sessionStorage.setItem('role', userData.role)
+            sessionStorage.setItem('id', userData.sub)
           }
         }
     )
