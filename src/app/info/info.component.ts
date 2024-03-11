@@ -38,7 +38,7 @@ showDropDown() {
 }
 
 redirectExam() {
-  window.location.href = '/focus/docs/production/index.html#/info/exame'
+  this.route.navigate(['info/exame'])
 }
 
 generateCurrentObject() {
