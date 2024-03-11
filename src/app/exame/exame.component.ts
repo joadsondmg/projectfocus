@@ -26,7 +26,7 @@ export class ExameComponent implements OnInit, OnDestroy{
   responseText = ""
   responseImage = ""
   resultResponse = 0
-  idUser = 1
+  idUser = 0
   validate = true
 
   currentDate = new Date()
