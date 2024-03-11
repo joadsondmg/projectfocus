@@ -151,7 +151,6 @@ redirectInfo() {
 }
 
 storeResultResponse(result: number){
-
   this.data.setResultResponse(sessionStorage.getItem('id'), result).subscribe(
     (response: any) => {
       console.log(response)
