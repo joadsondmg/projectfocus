@@ -5,39 +5,6 @@
     grid-template-rows: 0.1fr 1fr 0.1fr;
     place-items: center;
 }
-.header {
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    img {
-    width: 5rem;
-    }
-    img:nth-child(2){
-        width: 6rem;
-    }
-}
-.action {
-    img {
-        width: 1.5rem;
-        cursor: pointer;
-    }
-}
-.dropdown {
-    list-style-type: none;
-    position: absolute;
-    top: 3rem;
-    right: 1.5rem;
-    li{
-        padding: 0.5rem 2rem;
-        background-color: #bbbcc2;
-        border-radius: 0.2rem;
-        &:hover {
-            background-color: var(--background-color);
-            color: var(--default-text-color);
-        }
-    }
-}
 .info-container {
     width: 90%;
     height: 100%;

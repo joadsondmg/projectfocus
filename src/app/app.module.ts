@@ -6,11 +6,13 @@ import { ErrorComponent } from './error/error.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent
+    ErrorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +20,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HttpClientModule,
     FormsModule
+  ],
+  exports: [
+    HeaderComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

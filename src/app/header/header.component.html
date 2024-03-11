@@ -1,0 +1,10 @@
+<div class="header">
+    <img src="./assets/vale-logo-preto.png" alt="">
+    <img src="./assets/focus_name.png" alt="">
+    <div class="action">
+        <img src="./assets/user.png" alt="" (click)="showDropDown()">
+        <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
+            <li (click)="logout()">Sair</li>
+        </ul>
+    </div>
+</div>
