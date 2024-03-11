@@ -1,9 +1,9 @@
 <div class="main-container">
     <div class="header">
-        <img src="./../../assets/vale-logo-preto.png" alt="">
-        <img src="./../../assets/focus_name.png" alt="">
+        <img src="./assets/vale-logo-preto.png" alt="">
+        <img src="./assets/focus_name.png" alt="">
         <div class="action">
-            <img src="./../../assets/user.png" alt="" (click)="showDropDown()">
+            <img src="./assets/user.png" alt="" (click)="showDropDown()">
             <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
                 <li (click)="logout()">Sair</li>
             </ul>
@@ -14,13 +14,13 @@
             <h1>Bem-vindo, {{username}}</h1>
             <p>O teste psicológico foi criado para medir sua atenção, para realizá-lo, leia as instruções abaixo. Boa sorte!</p>
             <div class="gif-content">
-                <img src="./../../assets/action.gif" alt="">
+                <img src="./assets/action.gif" alt="">
             </div>
             <p>Clique na <span>barra de espaço</span> do teclado, toda vez que <span>a imagem correta aparecer.</span></p>
         </div>
         <div class="img-container">
             <span>Figura Correta:</span>
-            <img id="random-img" src="./../../assets/triangulo_vazado.png" alt="">
+            <img id="random-img" src="./assets/triangulo_vazado.png" alt="">
         </div>
     </div>
     <div class="footer">

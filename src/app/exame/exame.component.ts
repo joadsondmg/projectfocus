@@ -20,7 +20,7 @@ export class ExameComponent implements OnInit, OnDestroy{
   width = 0
   actionHit = 0
   omissionHit = 0
-  totalObjects = 30
+  totalObjects = 60
   countObjects = 0
   currentObject: any = ""
   responseText = ""
@@ -38,19 +38,19 @@ export class ExameComponent implements OnInit, OnDestroy{
   resultObject = [
     {
       responseText: "Você está liberado para suas atividades!",
-      responseImage: "./../../assets/colaboradores.png"
+      responseImage: "./assets/colaboradores.png"
     },
     {
       responseText: "Execução incorreta, gentileza procurar seu supervisor!",
-      responseImage: "./../../assets/supervisor.png"
+      responseImage: "./assets/supervisor.png"
     },
     {
       responseText: "Execução não foi como esperada, gentileza procurar medicina!",
-      responseImage: "./../../assets/medico.png"
+      responseImage: "./assets/medico.png"
     },
     {
       responseText: "Você já esgotou o número de tentativas hoje!",
-      responseImage: "./../../assets/erro.png"
+      responseImage: "./assets/erro.png"
     }
 ]
 
@@ -81,7 +81,7 @@ randomObjectCreate() {
 			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
 			const fill = ['/triangulo_vazado.png', '/triangulo.png']
 			const selectFill = Math.floor(Math.random() * 2)
-			triangle.src = "./../../assets" + fill[selectFill]
+			triangle.src = "./assets" + fill[selectFill]
 			triangle.style.transform = rotate
 			if( fill[selectFill] == this.currentObject.fill && rotate == this.currentObject.rotate ){
 				triangle.id = "triangulo"
@@ -198,7 +198,7 @@ validExecution() {
                       clearInterval(this.createObjects)
                       this.score()
                     }
-                    }, 600)
+                    }, 800)
                   }
                 }
               )

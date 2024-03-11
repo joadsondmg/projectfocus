@@ -44,7 +44,7 @@ redirectExam() {
 generateCurrentObject() {
   const randomImg =  document.getElementById('random-img') as HTMLImageElement
   sessionStorage.setItem('current-object', JSON.stringify(this.currentObject))
-  randomImg.src = "./../../assets/" + this.currentObject.fill
+  randomImg.src = "./assets/" + this.currentObject.fill
   randomImg.style.transform = this.currentObject.rotate
 }
 

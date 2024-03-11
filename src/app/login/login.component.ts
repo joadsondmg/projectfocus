@@ -40,10 +40,10 @@ showPassword() {
   const eyeImg = document.getElementById('show-pass') as HTMLImageElement
   if(password.type === "text"){
     password.type = "password"
-    eyeImg.src = "./../../assets/eye_off.png"
+    eyeImg.src = "./assets/eye_off.png"
   } else {
     password.type = "text"
-    eyeImg.src = "./../../assets/eye_on.png"
+    eyeImg.src = "./assets/eye_on.png"
   }
 }
 
