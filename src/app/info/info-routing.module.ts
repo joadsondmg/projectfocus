@@ -5,7 +5,7 @@ import { ExameComponent } from '../exame/exame.component';
 
 const routes: Routes = [
   { path: '', component: InfoComponent }, 
-  { path: 'exame', component:ExameComponent, loadChildren: () => import('../exame/exame.module').then(m => m.ExameModule) }
+  { path: 'exame', loadChildren: () => import('../exame/exame.module').then(m => m.ExameModule) }
 ];
 
 @NgModule({
