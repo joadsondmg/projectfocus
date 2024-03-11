@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { UserdataService } from '../userdata.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-info',
@@ -10,6 +12,7 @@ import { UserdataService } from '../userdata.service';
 export class InfoComponent implements OnInit {
 constructor(
   private route: Router,
+  private auth: AuthService,
   private data: UserdataService
 )
 {}
@@ -22,6 +25,17 @@ currentObject = {
   fill: this.fill[Math.floor(Math.random() * this.fill.length)],
   rotate: this.rotate[Math.floor(Math.random() * this.rotate.length)]
 };
+
+dropdownVisible = false
+
+logout() {
+  this.auth.logout()
+  this.route.navigate(['/login'])
+}
+
+showDropDown() {
+  this.dropdownVisible = !this.dropdownVisible;
+}
 
 redirectExam() {
   this.route.navigate(['info/exame'])
