@@ -1,5 +1,5 @@
 <?php
-include('local-connection.php');
+include('connection.php');
 
 require 'vendor/autoload.php';
 
