@@ -38,7 +38,7 @@ showDropDown() {
 }
 
 redirectExam() {
-  this.route.navigate(['/info/exame'])
+  this.route.navigate(['info/exame'])
 }
 
 generateCurrentObject() {
