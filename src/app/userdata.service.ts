@@ -17,9 +17,9 @@ export class UserdataService {
   // apiSet = 'http://localhost/projectfocus/php/set-result.php'
 
   // Hosp Connection
-  apiGetUser = 'https://aksietech.com.br/focus/php/user-data.php'
-  apiGetResult = 'https://aksietech.com.br/focus/php/valid-exec.php'
-  apiSet = 'https://aksietech.com.br/focus/php/set-result.php'
+  apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
+  apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
+  apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
   
   getUserData(token: string): Observable<any> {
     const data = { 

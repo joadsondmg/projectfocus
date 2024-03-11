@@ -13,7 +13,7 @@ export class AuthService {
   // api = 'http://localhost/projectfocus/php/auth.php'
 
   // Hosp Connection
-  api = 'https://aksietech.com.br/focus/php/auth.php'
+  api = 'https://backofficecheck.com.br/focus/php/auth.php'
 
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('access-token')
