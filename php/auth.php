@@ -22,8 +22,7 @@ if(isset($user)) {
         'user' => $user['user'],
         'name' => $user['name'],
         'email' => $user['email'],
-        'role' => $user['role'],
-        'result' => $user['result']
+        'role' => $user['role']
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success','token' => $token]);
