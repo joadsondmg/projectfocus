@@ -9,7 +9,7 @@
     $dbHost = 'u177475397_focus';
     $dbUsername = 'u177475397_rootfocus';
     $dbPassword = 'Root_control1!@#$%fcs';
-    $dbName = 'focus';
+    $dbName = 'u177475397_focus';
     $conexao = mysqli_connect($dbHost,$dbUsername,$dbPassword,$dbName);
     mysqli_set_charset($conexao, "utf8");
     
