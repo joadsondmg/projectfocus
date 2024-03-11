@@ -26,7 +26,7 @@ login() {
     next: (response) => {
       if(response) {
         sessionStorage.setItem('access-token', response)
-        this.route.navigate(['info'])
+        this.route.navigate(['/info'])
       } else {
         alert('Dados Incorretos')
         senha.value = ""
@@ -52,12 +52,12 @@ forgotPassword() {
 }
 
 redirectHome() {
-  this.route.navigate(['home'])
+  this.route.navigate(['/home'])
 }
 
 ngOnInit(): void{
   if (this.auth.isAuthenticated()) {
-    this.route.navigate(['info'])
+    this.route.navigate(['/info'])
   }
 }
 

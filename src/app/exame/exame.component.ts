@@ -128,7 +128,7 @@ score() {
    const actionBtn = document.getElementById('action-btn')
    if(actionBtn) {
     actionBtn.addEventListener('click', () => {
-      this.route.navigate(['info'])
+      this.route.navigate(['/info'])
     })
    }
    this.storeResultResponse(scoreValue)
@@ -148,7 +148,7 @@ handleSpaceKey(event: KeyboardEvent): void {
 }
 
 redirectInfo() {
-  this.route.navigate(['info'])
+  this.route.navigate(['/info'])
 }
 
 storeResultResponse(result: number){
@@ -183,7 +183,7 @@ validExecution() {
                     const actionBtn = document.getElementById('action-btn')
                     if(actionBtn) {
                       actionBtn.addEventListener('click', () => {
-                        this.route.navigate(['info'])
+                        this.route.navigate(['/info'])
                       })
                     }
                   } else {

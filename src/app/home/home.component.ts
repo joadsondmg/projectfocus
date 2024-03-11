@@ -12,12 +12,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   loginRedirect() {
-    this.route.navigate(['login'])
+    this.route.navigate(['/login'])
   }
 
   ngOnInit(): void {
     if(localStorage.getItem('access-token')){
-    this.route.navigate(['info'])
+    this.route.navigate(['/info'])
     }
   }
 
