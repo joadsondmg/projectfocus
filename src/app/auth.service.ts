@@ -8,7 +8,12 @@ import { Observable, map, of } from 'rxjs';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-  api = 'http://localhost/projectfocus/php/auth.php'
+
+  // Local Connection
+  // api = 'http://localhost/projectfocus/php/auth.php'
+
+  // Hosp Connection
+  api = 'https://aksietech.com.br/focus/php/auth.php'
 
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('access-token')

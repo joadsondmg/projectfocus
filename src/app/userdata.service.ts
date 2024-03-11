@@ -11,9 +11,15 @@ export class UserdataService {
     private http: HttpClient
   ) { }
 
-  apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
-  apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
-  apiSet = 'http://localhost/projectfocus/php/set-result.php'
+  // Local Connection
+  // apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
+  // apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
+  // apiSet = 'http://localhost/projectfocus/php/set-result.php'
+
+  // Hosp Connection
+  apiGetUser = 'https://aksietech.com.br/focus/php/user-data.php'
+  apiGetResult = 'https://aksietech.com.br/focus/php/valid-exec.php'
+  apiSet = 'https://aksietech.com.br/focus/php/set-result.php'
   
   getUserData(token: string): Observable<any> {
     const data = { 
