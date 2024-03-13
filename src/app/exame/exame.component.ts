@@ -20,7 +20,7 @@ export class ExameComponent implements OnInit, OnDestroy{
   width = 0
   actionHit = 0
   omissionHit = 0
-  totalObjects = 60
+  totalObjects = 5
   countObjects = 0
   currentObject: any = ""
   responseText = ""
