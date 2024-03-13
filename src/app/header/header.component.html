@@ -1,12 +1,23 @@
 <div class="header">
-    <img src="./assets/vale_logo_black.png" alt="">
-    <img src="./assets/focus_name.png" alt="">
+    <div class="logo">
+        <img src="./assets/focus_white.png" alt="">
+    </div>
     <div class="action">
-        <img src="./assets/user.png" alt="" (click)="showDropDown()">
-        <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
-            <li (click)="redirectInfo()">Infomações</li>
-            <li (click)="redirectAnalysis()">Analise</li>
-            <li (click)="logout()">Sair</li>
-        </ul>
+        <div class="routes-container">
+            <ul>
+                <li>Início</li>
+                <li>Análise</li>
+                <li>Painel de Admin</li>
+            </ul>
+        </div>
+        <div class="user-options">
+            <img src="./assets/user.png" alt="" (click)="showDropDown()">
+            <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
+                <li (click)="redirectInfo()">Infomações</li>
+                <li (click)="redirectAnalysis()">Analise</li>
+                <li (click)="logout()">Sair</li>
+            </ul>
+        </div>
+        
     </div>
 </div>
