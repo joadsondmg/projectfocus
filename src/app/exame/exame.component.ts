@@ -61,7 +61,7 @@ resizeStage() {
 }
 
 randomObjectCreate() {
-  var imgs = document.getElementsByClassName('img');
+  var imgs = document.getElementsByClassName('triangulo');
   var stage = document.getElementById('stage')
 		if(imgs.length > 0){
 			if (imgs[0].id != "triangulo") {
