@@ -97,3 +97,19 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    .info-container {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .info {
+        padding: 0;
+        padding-top: 2rem;
+    }
+    .img-container {
+        margin-bottom: 5rem;
+    }
+}
