@@ -1,7 +1,7 @@
 import { Component, HostListener,Renderer2, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from '../userdata.service';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-exame',
@@ -12,14 +12,14 @@ export class ExameComponent implements OnInit, OnDestroy{
   constructor(
     private route: Router,
     private data: UserdataService,
-    private renderer: Renderer2,
-    private el: ElementRef
+    // private renderer: Renderer2,
+    // private el: ElementRef
   ){}
 
   private createObjects: any;
 
-  currentHeight = window.innerHeight
-  currentWidth = window.innerWidth
+  currentHeight = 0
+  currentWidth = 0
   actionHit = 0
   omissionHit = 0
   totalObjects = 5
@@ -55,9 +55,15 @@ export class ExameComponent implements OnInit, OnDestroy{
     }
 ]
 
-resizeStage() {
-  this.currentHeight = window.innerHeight
-  this.currentWidth = window.innerWidth
+resize() {
+  const stage = document.getElementById('stage') as HTMLDivElement
+  if( window.innerWidth > 600) {
+    this.currentWidth = window.innerWidth
+    this.currentHeight = window. innerWidth
+  } else {
+    stage.style.height = '70%'
+    this.currentHeight = stage.clientHeight
+  }
 }
 
 randomObjectCreate() {
@@ -76,7 +82,6 @@ randomObjectCreate() {
 			let positionY = Math.floor(Math.random() * this.currentHeight) - 90
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
-
 			const triangle = document.createElement('img')
 			const orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
 			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
@@ -90,7 +95,7 @@ randomObjectCreate() {
       triangle.classList.add('triangulo')
       triangle.style.width = '50px'
       triangle.style.height = '50px'
-			triangle.style.position = 'absolute'
+			triangle.style.position = 'relative'
 			triangle.style.left = positionX + 'px'
 			triangle.style.top = positionY + 'px'
 
@@ -254,7 +259,7 @@ validExecution() {
 }
 
 ngOnInit(): void {
-  this.resizeStage()
+  this.resize()
   this.validExecution()
   // this.handleKeyEvent()
 }
