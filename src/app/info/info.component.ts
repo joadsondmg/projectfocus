@@ -43,16 +43,16 @@ infoLoader() {
   }
 }
 
-dropdownVisible = false
+// dropdownVisible = false
 
-logout() {
-  this.auth.logout()
-  this.route.navigate(['/login'])
-}
+// logout() {
+//   this.auth.logout()
+//   this.route.navigate(['/login'])
+// }
 
-showDropDown() {
-  this.dropdownVisible = !this.dropdownVisible;
-}
+// showDropDown() {
+//   this.dropdownVisible = !this.dropdownVisible;
+// }
 
 redirectExam() {
   this.route.navigate(['info/exame'])
