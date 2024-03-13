@@ -26,4 +26,11 @@ export class HeaderComponent {
       this.route.navigate(['/login'])
     }  
 
+    redirectAnalysis() {
+      this.route.navigate(['analysis']);
+    }
+
+    redirectInfo() {
+      this.route.navigate(['info']);
+    }
 }

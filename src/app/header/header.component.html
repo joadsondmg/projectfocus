@@ -4,6 +4,8 @@
     <div class="action">
         <img src="./assets/user.png" alt="" (click)="showDropDown()">
         <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
+            <li (click)="redirectInfo()">Infomações</li>
+            <li (click)="redirectAnalysis()">Analise</li>
             <li (click)="logout()">Sair</li>
         </ul>
     </div>
