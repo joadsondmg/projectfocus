@@ -20,11 +20,26 @@ constructor(
 username = ''
 fill = ['/triangulo_vazado.png', '/triangulo.png']
 rotate = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)']
+infoClick = ['barra de espaço do teclado', 'tela do celular']
+
+currentWidth = window.innerWidth
 
 currentObject = {
   fill: this.fill[Math.floor(Math.random() * this.fill.length)],
   rotate: this.rotate[Math.floor(Math.random() * this.rotate.length)]
 };
+
+infoLoader() {
+  const img = document.getElementById('gif') as HTMLImageElement
+  const info = document.getElementById('info-click') as HTMLSpanElement
+  if(this.currentWidth > 600) {
+    img.src = './assets/action_spacebar.gif'
+    info.innerHTML = this.infoClick[0]
+  } else {
+    img.src = './assets/action_screen.gif'
+    info.innerHTML = this.infoClick[1]
+  }
+}
 
 dropdownVisible = false
 
@@ -71,5 +86,6 @@ getUserData() {
 ngOnInit(): void {
   this.generateCurrentObject()
   this.getUserData()
+  this.infoLoader()
 }
 }
