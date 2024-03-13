@@ -100,7 +100,6 @@ randomObjectCreate() {
 			triangle.style.position = 'relative'
 			triangle.style.left = positionX + 'px'
 			triangle.style.top = positionY + 'px'
-
 			// console.log(fill[selectFill] + ' ' + this.currentObject.fill + ' ' + rotate + ' ' + this.currentObject.rotate)
       console.log(positionX + ' ' + positionY)
 
