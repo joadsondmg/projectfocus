@@ -36,7 +36,7 @@ export class ExameComponent implements OnInit, OnDestroy{
   year = this.currentDate.getFullYear()
   todayDate = this.day + "/" + this.month + "/" + this.year;
 
-  orientation = [ 'rotate(90deg)', 'rotate(270deg)'];
+  orientation = ['rotate(90deg)', 'rotate(270deg)'];
   fill = ['/triangulo_vazado.png', '/triangulo.png']
 
   resultObject = [
