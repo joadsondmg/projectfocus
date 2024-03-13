@@ -84,10 +84,10 @@ randomObjectCreate() {
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
 			const triangle = document.createElement('img')
-			const orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
+			const orientation = ['rotate(90deg)', 'rotate(270deg)'];
 			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
 			const fill = ['/triangulo_vazado.png', '/triangulo.png']
-			const selectFill = Math.floor(Math.random() * 2)
+			const selectFill = Math.floor(Math.random() * fill.length)
 			triangle.src = "./assets" + fill[selectFill]
 			triangle.style.transform = rotate
 			if( fill[selectFill] == this.currentObject.fill && rotate == this.currentObject.rotate ){
