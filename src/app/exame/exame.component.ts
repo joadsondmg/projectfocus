@@ -113,11 +113,11 @@ score() {
   console.log(this.actionHit + ' ' + this.omissionHit + ' ' + scoreValue)
   this.resultResponse = scoreValue
   switch(true){
-    case scoreValue >= 70:
+    case scoreValue >= 80:
       this.responseText = this.resultObject[0].responseText
       this.responseImage = this.resultObject[0].responseImage
       break;
-    case scoreValue >= 50:
+    case scoreValue >= 60:
       this.responseText = this.resultObject[1].responseText
       this.responseImage = this.resultObject[1].responseImage
       break;
