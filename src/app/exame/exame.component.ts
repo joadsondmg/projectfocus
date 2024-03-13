@@ -63,6 +63,7 @@ resize() {
   } else {
     stage.style.height = '70%'
     this.currentHeight = stage.clientHeight
+    this.currentWidth = stage.clientWidth
   }
 }
 
