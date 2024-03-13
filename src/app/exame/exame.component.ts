@@ -75,8 +75,8 @@ randomObjectCreate() {
       let positionX = Math.floor(Math.random() * this.currentWidth) - 90
 			let positionY = Math.floor(Math.random() * this.currentHeight) - 90
       if(this.currentWidth < 600){
-        positionX -= 90
-        positionY -= 90
+        positionX -= 150
+        positionY -= 150
       }
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
