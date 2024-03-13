@@ -58,8 +58,8 @@ export class ExameComponent implements OnInit, OnDestroy{
 resize() {
   const stage = document.getElementById('stage') as HTMLDivElement
   if( window.innerWidth > 600) {
-    this.currentWidth = window.innerWidth
-    this.currentHeight = window. innerWidth
+    this.currentWidth = stage.clientWidth
+    this.currentHeight = stage.clientHeight
   } else {
     stage.style.height = '70%'
     this.currentHeight = stage.clientHeight
