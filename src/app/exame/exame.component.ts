@@ -56,8 +56,10 @@ export class ExameComponent implements OnInit, OnDestroy{
 ]
 
 resizeStage() {
-  this.currentHeight = window.innerHeight
-  this.currentWidth = window.innerWidth
+  const stage = document.getElementById('stage') as HTMLDivElement
+  if( this.currentWidth < 600) {
+    stage.style.height = '80vh'
+  }
 }
 
 randomObjectCreate() {
@@ -76,10 +78,7 @@ randomObjectCreate() {
 			let positionY = Math.floor(Math.random() * this.currentHeight) - 90
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
-      if(this.currentWidth < 600){
-        positionX += 90
-        positionY += 90
-      }
+
 			const triangle = document.createElement('img')
 			const orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
 			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
@@ -97,7 +96,8 @@ randomObjectCreate() {
 			triangle.style.left = positionX + 'px'
 			triangle.style.top = positionY + 'px'
 
-			console.log(fill[selectFill] + ' ' + this.currentObject.fill + ' ' + rotate + ' ' + this.currentObject.rotate)
+			// console.log(fill[selectFill] + ' ' + this.currentObject.fill + ' ' + rotate + ' ' + this.currentObject.rotate)
+      console.log(positionX + ' ' + positionY)
 
 			stage?.appendChild(triangle);
 		}
