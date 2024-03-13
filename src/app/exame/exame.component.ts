@@ -36,6 +36,9 @@ export class ExameComponent implements OnInit, OnDestroy{
   year = this.currentDate.getFullYear()
   todayDate = this.day + "/" + this.month + "/" + this.year;
 
+  orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
+  fill = ['/triangulo_vazado.png', '/triangulo.png']
+
   resultObject = [
     {
       responseText: "Você está liberado para suas atividades!",
@@ -84,13 +87,11 @@ randomObjectCreate() {
 			positionX = positionX < 0 ? 0 : positionX
 			positionY = positionY < 0 ? 0 : positionY
 			const triangle = document.createElement('img')
-			const orientation = ['rotate(0deg)', 'rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)'];
-			const rotate = orientation[Math.floor(Math.random() * orientation.length)]
-			const fill = ['/triangulo_vazado.png', '/triangulo.png']
-			const selectFill = Math.floor(Math.random() * 2)
-			triangle.src = "./assets" + fill[selectFill]
+			const rotate = this.orientation[Math.floor(Math.random() * this.orientation.length)]
+			const fill = this.fill[Math.floor(Math.random() * this.fill.length)]
+			triangle.src = "./assets" + fill
 			triangle.style.transform = rotate
-			if( fill[selectFill] == this.currentObject.fill && rotate == this.currentObject.rotate ){
+			if( fill == this.currentObject.fill && rotate == this.currentObject.rotate ){
 				triangle.id = "triangulo"
 			}
       triangle.classList.add('triangulo')
