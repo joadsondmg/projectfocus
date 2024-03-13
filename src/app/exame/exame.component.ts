@@ -56,10 +56,8 @@ export class ExameComponent implements OnInit, OnDestroy{
 ]
 
 resizeStage() {
-  const stage = document.getElementById('stage') as HTMLDivElement
-  if( this.currentWidth < 600) {
-    stage.style.height = '80vh'
-  }
+  this.currentHeight = window.innerHeight
+  this.currentWidth = window.innerWidth
 }
 
 randomObjectCreate() {
