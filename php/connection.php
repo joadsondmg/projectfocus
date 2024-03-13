@@ -5,7 +5,7 @@
     // $dbPassword = '';
     // $dbName = 'focus';
 
-    // // Hostinger Connection
+    // Hostinger Connection
     $dbHost = 'localhost';
     $dbUsername = 'u177475397_rootfocus';
     $dbPassword = 'Root_control1!@#$%fcs';
