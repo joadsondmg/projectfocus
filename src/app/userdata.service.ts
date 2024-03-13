@@ -12,14 +12,14 @@ export class UserdataService {
   ) { }
 
   // Local Connection
-  // apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
-  // apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
-  // apiSet = 'http://localhost/projectfocus/php/set-result.php'
+  apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
+  apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
+  apiSet = 'http://localhost/projectfocus/php/set-result.php'
 
   // Hosp Connection
-  apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
-  apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
-  apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
+  // apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
+  // apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
+  // apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
   
   getUserData(token: string): Observable<any> {
     const data = { 
