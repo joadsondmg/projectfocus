@@ -59,6 +59,7 @@
     background-color: rgb(228, 230, 234);
     padding: 1rem;
     z-index: 999;
+    border-radius: 0.2rem;
         li{
             border-radius: 0.2rem;
             padding: 0.5rem;
@@ -66,6 +67,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            cursor: pointer;
             span {
                 width: 7rem;
                 text-align: start;
