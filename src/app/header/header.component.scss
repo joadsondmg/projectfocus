@@ -33,11 +33,7 @@
     li {
         padding: 0.6rem 1rem ;
         border-radius: 0.3rem;
-        &:hover {
-            background-color: #e0e0e0;
-            color: var(--background-color);
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
 }
 .user-options {
