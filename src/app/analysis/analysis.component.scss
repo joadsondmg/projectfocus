@@ -1,8 +1,9 @@
 .background-green {
-    background-color: green;
+    background-color: #B2F205;
 }
 .background-red {
-    background-color: red;
+    background-color: #F22E05;
+    color: var(--default-text-color) !important;
 }
 .main-container {
     width: 100vw;
@@ -32,6 +33,7 @@
         border: none;
         background-color: var(--background-color);
         color: var(--default-text-color);
+        border-radius: 0.2rem;
         &:hover {
             background-color: var(--background-color-hover);
         }
@@ -46,6 +48,7 @@
         padding: 0.3rem 1rem;
         background-color: #E4E6E8;
         outline: none;
+        border-radius: 0.2rem;
     }
 }
 .table {
@@ -60,9 +63,9 @@
     height: max-content;
     display: flex;
     flex-direction: column;
-    color: var(--default-text-color);
-    // color: var(--background-color);
-    background-color: rgb(212, 212, 214);
+    // color: var(--default-text-color);
+    // background-color: rgb(212, 212, 214);
+    color: var(--background-color);
 }
 .table-header {
     display: flex;
@@ -74,7 +77,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #343773;
+    // background-color: #343773;
+    border-bottom: 1px solid black;
     div {
         width: 10rem;
         padding: 1rem;
@@ -91,7 +95,7 @@
     justify-content: center;
     width: 100%;
     gap: 0.5rem;
-    background-color: rgb(226, 226, 228);
+    // background-color: rgb(226, 226, 228);
     padding: 1rem 0;
 }
 .table-row {
@@ -117,7 +121,7 @@
             display: block;
             width: 5rem;
             border-radius: 0.5rem;
-            color: var(--default-text-color);
+            color: var(--background-color);
         }
     }
     

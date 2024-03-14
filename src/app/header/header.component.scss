@@ -57,6 +57,7 @@
     padding: 1rem;
     box-shadow: 3px 3px 10px -5px;
     z-index: 999;
+    border-radius: 0.2rem;
         li{
             border-radius: 0.2rem;
             padding: 0.5rem;
@@ -64,6 +65,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            cursor: pointer;
             span {
                 width: 7rem;
                 text-align: start;
