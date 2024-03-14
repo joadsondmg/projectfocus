@@ -60,8 +60,9 @@
     height: max-content;
     display: flex;
     flex-direction: column;
-    color: var(--default-text-color);
-    background-color: rgb(212, 212, 214);
+    // color: var(--default-text-color);
+    color: var(--background-color);
+    // background-color: rgb(212, 212, 214);
 }
 .table-header {
     display: flex;
@@ -73,7 +74,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #343773;
+    // background-color: #343773;
     div {
         width: 10rem;
         padding: 1rem;
