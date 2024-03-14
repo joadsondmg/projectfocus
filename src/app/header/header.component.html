@@ -4,18 +4,43 @@
     </div>
     <div class="action">
         <div class="routes-container">
-            <ul>
-                <li>Início</li>
-                <li>Análise</li>
-                <li>Painel de Admin</li>
+            <ul class="routes">
+                <li (click)="redirectInfo()">Início</li>
+                <li (click)="redirectAnalysis()">Análise</li>
+                <li (click)="onBuild()">Painel</li>
             </ul>
         </div>
         <div class="user-options">
             <img src="./assets/user.png" alt="" (click)="showDropDown()">
             <ul id="user-info" class="dropdown" *ngIf="dropdownVisible">
-                <li (click)="redirectInfo()">Infomações</li>
-                <li (click)="redirectAnalysis()">Analise</li>
-                <li (click)="logout()">Sair</li>
+                <li (click)="onBuild()">
+                    <div class="img-dropdown">
+                        <img src="./assets/user-edit.png" alt="">
+                    </div>
+                    <span>Perfil</span>
+                    <img src="./assets/arrow.png" alt="">
+                </li>
+                <li (click)="onBuild()">
+                    <div class="img-dropdown">
+                        <img src="./assets/configuration.png" alt="">
+                    </div>
+                    <span>Configuração</span>
+                    <img src="./assets/arrow.png" alt="">
+                </li>
+                <li (click)="onBuild()">
+                    <div class="img-dropdown">
+                        <img src="./assets/help.png" alt="">
+                    </div>
+                    <span>Ajuda</span>
+                    <img src="./assets/arrow.png" alt="">
+                </li>
+                <li (click)="logout()">
+                    <div class="img-dropdown">
+                        <img src="./assets/logout.png" alt="">
+                    </div>
+                    <span>Sair</span>
+                    <img src="./assets/arrow.png" alt="">
+                </li>
             </ul>
         </div>
         

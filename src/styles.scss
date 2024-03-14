@@ -2,6 +2,8 @@
 
 :root {
 	--background-color: #101726;
+	--background-color-hover: #63666c;
+	--intern-background-color: #ffffff;
 	--default-text-color: white;
 	--btn-default-color: #F2E205;
     --btn-default-hover: #4F5159;
@@ -16,4 +18,7 @@
     padding: 0;
     box-sizing: border-box;
 	font-family: Poppins, sans-serif;
+}
+body {
+	background-color: var(--intern-background-color);
 }

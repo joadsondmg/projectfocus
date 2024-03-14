@@ -33,4 +33,8 @@ export class HeaderComponent {
     redirectInfo() {
       this.route.navigate(['info']);
     }
+
+    onBuild() {
+      alert('Função em desenvolvimento')
+    }
 }

@@ -7,12 +7,39 @@
                     <label for="date">Data:</label>
                     <input type="date" id="date">
                 </div>
+                <button (click)="filterData()">Filtrar</button>
             </div>
-            <div class="table"></div>
+            <div class="table">
+                <div class="table-data">
+                    <div class="table-header">
+                        <div class="table-title">
+                            <div>ID do usuário</div>
+                            <div>Resultado</div>
+                            <div>Aprovado</div>
+                        </div>
+                    </div>
+                        <div class="search-data-elements" >
+                            <div class="table-body">
+                                <div class="table-row" *ngFor="let item of filteredResults" >
+                                    <div class="row-data">
+                                        <div>{{item.id_user}}</div>
+                                        <div>{{item.result}}%</div>
+                                        <div><span [ngClass]="{'background-green': item.result >= 80, 'background-red': item.result < 80}" >{{item.result >= 80 ? "SIM" : "NÃO"}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="simple-pagination">
+                    <img src="./assets/arrow-left.png" (click)="prevPageFilter()" alt="">
+                    <div id="current-page">{{page}}</div>
+                    <img src="./assets/arrow.png" (click)="nextPageFilter()" alt="">
+                </div>
+            </div>
         </div>
         <div class="dash-container">
-            <div class="dash">
-
+            <div class="dash-content">
+                <canvas id="dash" class="dash"></canvas>
             </div>
         </div>
     </div>
