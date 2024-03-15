@@ -13,7 +13,7 @@ $pass = $data['password'];
 
 $sql = "SELECT * FROM users WHERE user='$user' AND password='$pass'";
 
-$result = mysqli_query($conexao, $sql);
+$result = mysqli_query($connection, $sql);
 $user = mysqli_fetch_assoc($result);
 if(isset($user)) {
     $tokenPayload = [
@@ -27,6 +27,6 @@ if(isset($user)) {
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success','token' => $token]);
 } else {
-    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas']);
+    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas', 'erro' => mysqli_error($connection)]);
 }
 ?>

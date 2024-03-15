@@ -12,10 +12,10 @@
     // $dbName = 'u177475397_focus';
 
 
-    $conexao = mysqli_connect($dbHost,$dbUsername,$dbPassword,$dbName);
-    mysqli_set_charset($conexao, "utf8");
+    $connection = mysqli_connect($dbHost,$dbUsername,$dbPassword,$dbName);
+    mysqli_set_charset($connection, "utf8");
     
-    if ($conexao -> connect_error) {
+    if ($connection -> connect_error) {
         echo "ERRO DE CONEXÃO";
     }
 ?>

@@ -25,7 +25,9 @@ export class AnalysisComponent implements OnInit {
   day = this.currentDate.getDate().toString().padStart(2, '0')
   month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
   year = this.currentDate.getFullYear()
-  todayDate = this.day + "/" + this.month + "/" + this.year;
+  date = this.day + "/" + this.month + "/" + this.year;
+
+  counter = 0
 
   formatDate(date: string): string {
     const objectDate = date.split('-');
@@ -37,14 +39,26 @@ export class AnalysisComponent implements OnInit {
 
   filterData(){
     const input = document.getElementById('date') as HTMLInputElement
-    let currentInputDate = this.formatDate(input.value)
-    this.page = 1
-    this.todayDate = currentInputDate
-    this.getFilterResult()
+    if(input.value == ""){
+      alert('Insira uma data para aplicar o filtro')
+    } else {
+      let inputDate = this.formatDate(input.value)
+      if(inputDate != this.date){
+        this.date = inputDate
+        this.page = 1
+        this.countResult()
+        console.log(this.date)
+        this.getResults()
+        this.getFilterResult()
+      } else {
+        alert('Filtro já aplicado')
+      }
+      
+    }
   }
 
   getFilterResult() {
-    this.data.getFilteredResults(this.todayDate, this.page).subscribe(
+    this.data.getFilteredResults(this.date, this.page).subscribe(
       (response) => {
         if(response.status === "success") {
           this.filteredResults = response.results;
@@ -56,7 +70,17 @@ export class AnalysisComponent implements OnInit {
   }
 
   getResults(): any {
-    this.data.getAllResults(this.todayDate).subscribe(
+    const canvas = document.getElementById('dash') as HTMLCanvasElement
+    const canvasContainer = document.getElementById('dash-content')
+    if(canvas){
+      canvas.parentNode?.removeChild(canvas);
+    }
+    const currentCanvas = document.createElement('canvas');
+    currentCanvas.id = 'dash'
+    currentCanvas.classList.add('dash')
+    canvasContainer?.appendChild(currentCanvas)
+
+    this.data.getAllResults(this.date).subscribe(
       (response: any) => {
         if(response.status === 'success'){
           response.results.forEach((item: any) => {
@@ -69,16 +93,28 @@ export class AnalysisComponent implements OnInit {
         }
     })
   }
+
+  countResult() {
+    this.data.countResults(this.date).subscribe(
+      (response) => {
+        if(response.status === 'success'){
+          this.counter = Math.round(response.amount/5)
+      } else {
+        alert('Erro ao quantificar resultados')
+      }
+    }
+    )
+  }
   
   nextPageFilter() {
-    this.page++
-    this.getFilterResult()
+    if(this.page < this.counter) {
+      this.page++
+      this.getFilterResult()
+    }
   }
 
   prevPageFilter() {
-    if(this.page == 1) {
-      console.log('first-page')
-    }else {
+    if( this.page != 1 ){
       this.page--
       this.getFilterResult()
     }
@@ -96,7 +132,7 @@ export class AnalysisComponent implements OnInit {
     this.donutChartData.forEach(resultado => {
       if (resultado < 60) {
         abaixoDe60++;
-      } else if (resultado >= 60 && resultado <= 80) {
+      } else if (resultado >= 60 && resultado < 80) {
         entre60e80++;
       } else {
         acimaDe80++;
@@ -123,6 +159,7 @@ export class AnalysisComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.countResult();
     this.getResults()
     this.getFilterResult()
   }
