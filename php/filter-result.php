@@ -4,14 +4,14 @@ include ('connection.php');
 $itemsPerPage = 5;
 
 $data = json_decode(file_get_contents('php://input'), true);
-$date = $data['today_date'];
+$date = $data['date'];
 $page = intval($data['page']);
 
 $offset = ($page - 1) * $itemsPerPage;
 
 $sql = "SELECT * FROM results WHERE date = '$date' LIMIT $itemsPerPage OFFSET $offset";
 
-$exec = mysqli_query($conexao, $sql);
+$exec = mysqli_query($connection, $sql);
 if($exec) {
     $result = array();
 
@@ -20,6 +20,6 @@ if($exec) {
     }
     echo json_encode(['status' => 'success',  'results' => $result]);
 } else {
-    echo json_encode(['status' => 'fail', 'erro' => mysqli_error($conexao)]);
+    echo json_encode(['status' => 'fail', 'erro' => mysqli_error($connection)]);
 }
 ?>
