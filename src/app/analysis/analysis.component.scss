@@ -94,7 +94,6 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 0.5rem;
     // background-color: rgb(226, 226, 228);
     padding: 1rem 0;
 }
@@ -110,10 +109,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &:hover {
+        background-color: #E4E6E8;
+    }
     div {
         width: 10rem;
         text-align: center;
-        padding: 1rem;
+        padding: 0.5rem 1rem;
         color: var(--background-color);
         display: flex;
         justify-content: center;
