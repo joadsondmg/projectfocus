@@ -14,9 +14,10 @@
                 </div>
                 <div class="input-container">
                     <label for="password">Senha:</label>
-                    <select name="password" id="password" [(ngModel)]="objectUser.password">
+                    <!-- <select name="password" id="password" [(ngModel)]="objectUser.password">
                         <option value="vale2024">Senha Padrão</option>
-                    </select>
+                    </select> -->
+                    <input type="text" id="password" name="password" [(ngModel)]="objectUser.password">
                 </div>
                 <div class="input-container">
                     <label for="role">Função:</label>

@@ -18,7 +18,6 @@ export class UserdataService {
   apiSet = 'http://localhost/projectfocus/php/set-result.php'
   apiFilterResult = 'http://localhost/projectfocus/php/filter-result.php'
   apiCountResult = 'http://localhost/projectfocus/php/count-result.php'
-  apiCreateUser = 'http://localhost/projectfocus/php/create-user.php'
 
   // Hosp Connection
   // apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
@@ -27,7 +26,6 @@ export class UserdataService {
   // apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
   // apiFilterResult = 'https://backofficecheck.com.br/focus/php/filter-result.php'
   // apiCountResult = 'https://backofficecheck.com.br/focus/php/count-result.php'
-  // apiCreateUser = 'https://backofficecheck.com.br/focus/php/count-result.php'
 
 
   getUserData(token: string): Observable<any> {
@@ -79,12 +77,6 @@ export class UserdataService {
       'date' : date,
     }
     return this.http.post(this.apiCountResult, data)
-  }
-
-  login(userData: object): Observable<string> {
-    return this.http.post<any>(this.apiCreateUser, userData).pipe(
-      map(data => data.status)
-    );
   }
 
 }

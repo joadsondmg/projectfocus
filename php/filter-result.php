@@ -14,7 +14,6 @@ $sql = "SELECT * FROM results WHERE date = '$date' LIMIT $itemsPerPage OFFSET $o
 $exec = mysqli_query($connection, $sql);
 if($exec) {
     $result = array();
-
     while ($row = mysqli_fetch_assoc($exec)) {
         $result[] = $row;
     }

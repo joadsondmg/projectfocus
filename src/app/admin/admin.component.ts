@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserdataService } from '../userdata.service';
+import { UserCrudService } from '../user-crud.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,7 +8,7 @@ import { UserdataService } from '../userdata.service';
 })
 export class AdminComponent {
   constructor(
-    private data: UserdataService
+    private crud: UserCrudService
   ){}
 
   objectUser = {
@@ -27,8 +27,18 @@ export class AdminComponent {
   }
 
   createUser() {
+    this.objectUser.name = this.objectUser.name.toUpperCase()
     if(this.objectUser.name != "" && this.objectUser.password != "" && this.objectUser.role != "" ) {
-      
+      this.crud.createUser(this.objectUser).subscribe(
+        (response) => {
+          if(response === 'success') {
+            alert('Usuário criado com sucesso!')
+          } else if(response === 'denied') {
+            alert('O usuário já existe!')
+          } else if(response === 'fail') {
+            alert('Erro na criação do usuário!')
+          }
+      })
     } else {
       alert('Preencha todos os campos')
     }

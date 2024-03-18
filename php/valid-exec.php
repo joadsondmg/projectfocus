@@ -8,10 +8,9 @@ $date = $data['date'];
 $sql = "SELECT * FROM results WHERE id_user = '$id_user' AND date = '$date'";
 
 $exec = mysqli_query($connection, $sql);
-$result = mysqli_fetch_assoc($exec);
-if($result) {
-    echo json_encode(['status' => 'denied']);
+if($exec->num_rows == 0) {
+    echo json_encode(['status' => 'success', 'message' => 'Usuário apto para realizar  o teste']);
 } else {
-    echo json_encode(['status' => 'success', 'erro' => mysqli_error($connection)]);
+    echo json_encode(['status' => 'denied',  'message' => 'Teste já feito pelo usuário', 'erro' => mysqli_error($connection)]);
 }
 ?>
