@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$secret_key = "teste";
+$secret_key = "843d1a72f8e9d8f1d51785b5ccf1c69c589430ab";
 
 $data = json_decode(file_get_contents('php://input'), true);
 $token = $data['token'];

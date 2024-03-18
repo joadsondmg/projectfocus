@@ -56,8 +56,7 @@ generateCurrentObject() {
 getUserData() {
   const storedToken = sessionStorage.getItem('access-token')
   if(storedToken){
-    const token = storedToken
-    this.data.getUserData(token).subscribe(
+    this.data.getUserData(storedToken).subscribe(
       (response) => {
         const userData = response.data
         if(userData){
