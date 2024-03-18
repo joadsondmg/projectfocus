@@ -46,6 +46,12 @@ export class AdminComponent {
         (response) => {
           if(response === 'success') {
             alert('Usuário criado com sucesso!')
+            this.objectUser.name = ""
+            this.objectUser.user = ""
+            this.objectUser.role = ""
+            if(!this.passChanger) {
+              this.objectUser.password = ""
+            }
           } else if(response === 'denied') {
             alert('O usuário já existe!')
           } else if(response === 'fail') {
