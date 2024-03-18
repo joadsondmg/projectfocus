@@ -72,7 +72,6 @@ getUserData() {
         }
     )
   }
-  this.checkFirstLogin()
 }
 
 passUpdate() {
@@ -119,5 +118,6 @@ ngOnInit(): void {
   this.generateCurrentObject()
   this.getUserData()
   this.infoLoader()
+  this.checkFirstLogin()
 }
 }
