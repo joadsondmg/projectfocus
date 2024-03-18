@@ -1,0 +1,38 @@
+<div class="main-container">
+    <app-header></app-header>
+    <div class="admin-panel-container">
+        <div class="insert-user-container">
+            <div class="content">
+                <h2>Criação de Usuário</h2>
+                <div class="input-container">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" [(ngModel)]="objectUser.name" (blur)="setUserInput()">
+                </div>
+                <div class="input-container">
+                    <label for="user">Usuário:</label>
+                    <input type="text" id="user" [(ngModel)]="objectUser.user" disabled>
+                </div>
+                <div class="input-container">
+                    <label for="password">Senha:</label>
+                    <!-- <select name="password" id="password" [(ngModel)]="objectUser.password">
+                        <option value="vale2024">Senha Padrão</option>
+                    </select> -->
+                    <input type="text" id="password" name="password" [(ngModel)]="objectUser.password">
+                </div>
+                <div class="input-container">
+                    <label for="role">Função:</label>
+                    <select name="role" id="role" [(ngModel)]="objectUser.role">
+                        <option value="" disabled selected>Escolha uma Opção</option>
+                        <option value="user">Usuário Comum</option>
+                        <option value="analyst">Analista</option>
+                        <option value="adm">Administrador</option>
+                    </select>
+                </div>
+                <button (click)="createUser()">Cadastrar</button>
+            </div>
+        </div>
+        <div class="table-container">
+    
+        </div>
+    </div>
+</div>

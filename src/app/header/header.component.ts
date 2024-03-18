@@ -34,6 +34,10 @@ export class HeaderComponent {
       this.route.navigate(['info']);
     }
 
+    redirectAdmin() {
+      this.route.navigate(['admin']);
+    }
+
     onBuild() {
       alert('Função em desenvolvimento')
     }

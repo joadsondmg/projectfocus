@@ -5,28 +5,26 @@ require 'vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
-$secret_key = "teste";
+$secret_key = "843d1a72f8e9d8f1d51785b5ccf1c69c589430ab";  // Secret for signing token SHA-1
 
 $data = json_decode(file_get_contents('php://input'), true);
 $user = $data['user'];
-$pass = $data['password'];
+$password = $data['password'];
 
-$sql = "SELECT * FROM users WHERE user='$user' AND password='$pass'";
-
+$sql = "SELECT * FROM users WHERE user='$user'";
 $result = mysqli_query($connection, $sql);
-$user = mysqli_fetch_assoc($result);
-if(isset($user)) {
+
+if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
     $tokenPayload = [
         'iss' => 'focus',
         'sub' => $user['id'],
         'user' => $user['user'],
         'name' => $user['name'],
-        'email' => $user['email'],
         'role' => $user['role']
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
-    echo json_encode(['status' => 'success','token' => $token]);
+    echo json_encode(['status' => 'success', 'token' => $token]);
 } else {
-    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas', 'erro' => mysqli_error($connection)]);
+    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas']);
 }
 ?>
