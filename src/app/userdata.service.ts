@@ -12,21 +12,21 @@ export class UserdataService {
   ) { }
 
   // Local Connection
-  // apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
-  // apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
-  // apiGetAllResult = 'http://localhost/projectfocus/php/get-results.php'
-  // apiSet = 'http://localhost/projectfocus/php/set-result.php'
-  // apiFilterResult = 'http://localhost/projectfocus/php/filter-result.php'
-  // apiCountResult = 'http://localhost/projectfocus/php/count-result.php'
+  apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
+  apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
+  apiGetAllResult = 'http://localhost/projectfocus/php/get-results.php'
+  apiSet = 'http://localhost/projectfocus/php/set-result.php'
+  apiFilterResult = 'http://localhost/projectfocus/php/filter-result.php'
+  apiCountResult = 'http://localhost/projectfocus/php/count-result.php'
   
 
   // Hosp Connection
-  apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
-  apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
-  apiGetAllResult = 'https://backofficecheck.com.br/focus/php/get-results.php'
-  apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
-  apiFilterResult = 'https://backofficecheck.com.br/focus/php/filter-result.php'
-  apiCountResult = 'https://backofficecheck.com.br/focus/php/count-result.php'
+  // apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
+  // apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
+  // apiGetAllResult = 'https://backofficecheck.com.br/focus/php/get-results.php'
+  // apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
+  // apiFilterResult = 'https://backofficecheck.com.br/focus/php/filter-result.php'
+  // apiCountResult = 'https://backofficecheck.com.br/focus/php/count-result.php'
   
   getUserData(token: string): Observable<any> {
     const data = { 
