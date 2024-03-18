@@ -5,16 +5,18 @@ require 'vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
-$secret_key = "843d1a72f8e9d8f1d51785b5ccf1c69c589430ab";  // Secret for signing token SHA-1
+$secret_key = "teste";
 
 $data = json_decode(file_get_contents('php://input'), true);
 $user = $data['user'];
-$password = $data['password'];
+$pass = $data['password'];
 
-$sql = "SELECT * FROM users WHERE user='$user'";
+$sql = "SELECT * FROM users WHERE user='$user' AND password='$pass'";
+
 $result = mysqli_query($connection, $sql);
+$user = mysqli_fetch_assoc($result);
 
-if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
+if($result->num_rows > 0) {
     $tokenPayload = [
         'iss' => 'focus',
         'sub' => $user['id'],
@@ -23,8 +25,9 @@ if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
         'role' => $user['role']
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
-    echo json_encode(['status' => 'success', 'token' => $token]);
+    echo json_encode(['status' => 'success','token' => $token]);
 } else {
     echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas', 'erro' => mysqli_error($connection)]);
 }
+
 ?>
