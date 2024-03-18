@@ -21,6 +21,5 @@ if($exec) {
     echo json_encode(['status' => 'success', 'message' => 'Resultado  registrado correctamente']);
 } else {
     echo json_encode(['status' => 'fail', 'erro' => mysqli_error($connection)]);
-    
 }
 ?>

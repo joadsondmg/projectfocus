@@ -16,6 +16,8 @@ constructor(
 
 username = ''
 
+firstAcessControl = false
+
 fill = ['/triangulo_vazado.png', '/triangulo.png']
 rotate = ['rotate(90deg)', 'rotate(270deg)']
 
@@ -64,6 +66,9 @@ getUserData() {
             this.username = firstName + " " + lastName
             sessionStorage.setItem('role', userData.role)
             sessionStorage.setItem('id', userData.sub)
+            if(userData.access == 0) {
+              this.firstAcessControl = true
+            }
           }
         }
     )
