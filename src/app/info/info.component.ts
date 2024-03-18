@@ -12,7 +12,6 @@ import { map } from 'rxjs';
 export class InfoComponent implements OnInit {
 constructor(
   private route: Router,
-  private auth: AuthService,
   private data: UserdataService
 )
 {}
@@ -43,17 +42,6 @@ infoLoader() {
   }
 }
 
-// dropdownVisible = false
-
-// logout() {
-//   this.auth.logout()
-//   this.route.navigate(['/login'])
-// }
-
-// showDropDown() {
-//   this.dropdownVisible = !this.dropdownVisible;
-// }
-
 redirectExam() {
   this.route.navigate(['info/exame'])
 }
@@ -79,6 +67,7 @@ getUserData() {
             this.username = firstName + " " + lastName
             sessionStorage.setItem('role', userData.role)
             sessionStorage.setItem('id', userData.sub)
+            console.log(userData.name)
           }
         }
     )
