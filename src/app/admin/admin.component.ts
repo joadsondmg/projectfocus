@@ -23,7 +23,12 @@ export class AdminComponent {
 
   setDefaultPass() {
     this.passChanger = !this.passChanger
-    this.objectUser.password = this.defaultPass
+    if(this.passChanger) {
+      this.objectUser.password = this.defaultPass
+    } else {
+      this.objectUser.password = ''
+    }
+    
   }
 
   setUserInput() {
