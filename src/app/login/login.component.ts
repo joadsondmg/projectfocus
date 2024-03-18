@@ -21,18 +21,24 @@ userData = {
 }
 
 login() {
-  const senha = document.getElementById('password') as HTMLInputElement
-  this.auth.login(this.userData).subscribe({
-    next: (response) => {
-      if(response) {
-        sessionStorage.setItem('access-token', response)
-        this.route.navigate(['/info'])
-      } else {
-        alert('Dados Incorretos')
-        senha.value = ""
+  const user = document.getElementById('user') as HTMLInputElement
+  const pass = document.getElementById('password') as HTMLInputElement
+  if(user.value != "" && pass.value != "" ) {
+    this.auth.login(this.userData).subscribe({
+      next: (response) => {
+        if(response) {
+          sessionStorage.setItem('access-token', response)
+          this.route.navigate(['/info'])
+        } else {
+          alert('Dados Incorretos')
+          pass.value = ""
+        }
       }
-    }
-  })
+    })
+  } else {
+    alert('Preencha os campos')
+  }
+  
 }
 
 showPassword() {
