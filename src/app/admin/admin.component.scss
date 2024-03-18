@@ -53,8 +53,8 @@
         outline: none;
         padding-left: 1rem;
     }
-    select {
-        width: 100%;
+    input[type=checkbox] {
+        width: 30% !important;
         outline: none;
     }
 }
