@@ -36,6 +36,8 @@ export class AdminComponent {
     const objectName = name.split(' ')
     if(name != "") {
       this.objectUser.user = (objectName[0] + "." + objectName[objectName.length - 1]).toLowerCase()
+    } else {
+      this.objectUser.user = ""
     }
   }
 
