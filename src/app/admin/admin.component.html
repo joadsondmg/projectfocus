@@ -15,7 +15,7 @@
                 <div class="input-container">
                     <label for="password">Senha:</label>
                     <input type="text" id="password" name="password" [(ngModel)]="objectUser.password" [disabled]="passChanger">
-                    <input type="checkbox" id="passchanger" [(ngModel)]="passChanger" (change)="setDefaultPass()">
+                    <input type="checkbox" id="passchanger" [(ngModel)]="passChanger" (click)="setDefaultPass()">
                 </div>
                 <div class="input-container">
                     <label for="role">Função:</label>
