@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from '../userdata.service';
+import { UserCrudService } from '../user-crud.service';
 
 @Component({
   selector: 'app-info',
@@ -10,7 +11,8 @@ import { UserdataService } from '../userdata.service';
 export class InfoComponent implements OnInit {
 constructor(
   private route: Router,
-  private data: UserdataService
+  private data: UserdataService,
+  private crud: UserCrudService
 )
 {}
 
@@ -66,18 +68,57 @@ getUserData() {
             this.username = firstName + " " + lastName
             sessionStorage.setItem('role', userData.role)
             sessionStorage.setItem('id', userData.sub)
-            if(userData.access == 0) {
-              this.firstAcessControl = true
-            }
           }
         }
     )
   }
 }
 
+passUpdate() {
+  const pass = document.getElementById('password') as HTMLInputElement
+  const repeatPass = document.getElementById('repeat_password') as HTMLInputElement
+  if(pass.value && repeatPass.value) {
+    if(pass.value === repeatPass.value) {
+      const objectUser = {
+        'id': sessionStorage.getItem('id'),
+        'password': pass.value
+      }
+      this.crud.updatePassword(objectUser).subscribe(
+        (response) => {
+          if(response === 'success') {
+            alert('Senha alterada com sucesso!')
+            this.firstAcessControl = false
+
+        } else {
+          alert('Erro ao alterar senha. Por favor, entre em contato com um admnistador')
+        }
+      })
+    } else {
+      alert('As senhas  devem ser iguais')
+    }
+  } else {
+    alert('Preencha todos os campos')
+  }
+}
+
+checkFirstLogin() {
+  const objectUser = {
+    'id': sessionStorage.getItem('id')
+  }
+  this.crud.validFirstAcces(objectUser).subscribe(
+    (response) => {
+      const userData = response.results
+      if(userData[0].access == 0) {
+        this.firstAcessControl = true
+      }
+    }
+  )
+}
+
 ngOnInit(): void {
   this.generateCurrentObject()
   this.getUserData()
   this.infoLoader()
+  this.checkFirstLogin()
 }
 }

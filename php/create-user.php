@@ -6,11 +6,13 @@ $name = $data['name'];
 $user = $data['user'];
 $password = $data['password'];
 $role = $data['role'];
+$access = 0;
+$map = 0;
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 $sqlSearch = "SELECT * FROM users WHERE user = '$user'";
-$sqlCreate = "INSERT INTO users (name, user, password, role) VALUES ('$name', '$user', '$hashed_password', '$role')";
+$sqlCreate = "INSERT INTO users (name, user, password, role, map, access) VALUES ('$name', '$user', '$hashed_password', '$role','$map', '$access')";
 
 $execSearch = mysqli_query($connection, $sqlSearch);
 // 

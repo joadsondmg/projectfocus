@@ -17,4 +17,20 @@
     <div class="footer">
         <button (click)="redirectExam()">INICIAR</button>
     </div>
+    <div class="first-access-panel" *ngIf="firstAcessControl">
+        <div class="pass-container">
+            <h3>Redefina sua senha abaixo para continuar</h3>
+            <div class="input-container">
+                <div class="input-content">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" (keyup.enter)="passUpdate()">
+                </div>
+                <div class="input-content">
+                    <label for="repeat_password">Confirme sua senha:</label>
+                    <input type="password" id="repeat_password" placeholder="Digite novamente sua senha" (keyup.enter)="passUpdate()">
+                </div>
+                <button (click)="passUpdate()">Alterar senha</button>
+            </div>
+        </div>
+    </div>
 </div>
