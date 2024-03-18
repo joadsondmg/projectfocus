@@ -25,6 +25,6 @@ if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success', 'token' => $token]);
 } else {
-    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas']);
+    echo json_encode(['status' => 'fail', 'message' => 'Credenciais inválidas', 'erro' => mysqli_error($connection)]);
 }
 ?>
