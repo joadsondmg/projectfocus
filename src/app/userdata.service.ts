@@ -35,7 +35,7 @@ export class UserdataService {
     return this.http.post<any>(this.apiGetUser, data);
   }
 
-  setResultResponse(id: any, result: any): Observable<any>{
+  setResultResponse(id: any, objectResult: any): Observable<any>{
     const currentDate = new Date()
     const day = currentDate.getDate().toString().padStart(2, '0')
     const month = (currentDate.getMonth()+1).toString().padStart(2, '0')
@@ -43,7 +43,9 @@ export class UserdataService {
     const todayDate = day + "/" + month + "/" + year;
     const data = { 
       'id_user' : id,
-      'result': result,
+      'result': objectResult.resultResponse,
+      'o_error': objectResult.omissionError,
+      'a_error': objectResult.actionError,
       'date': todayDate
     };
     return this.http.post(this.apiSet, data)

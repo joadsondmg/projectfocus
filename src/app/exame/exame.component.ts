@@ -1,7 +1,6 @@
-import { Component, HostListener,Renderer2, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from '../userdata.service';
-// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-exame',
@@ -12,23 +11,32 @@ export class ExameComponent implements OnInit, OnDestroy{
   constructor(
     private route: Router,
     private data: UserdataService,
-    // private renderer: Renderer2,
-    // private el: ElementRef
   ){}
 
   private createObjects: any;
 
   currentHeight = 0
   currentWidth = 0
-  actionHit = 0
-  omissionHit = 0
   totalObjects = 60
   countObjects = 0
   currentObject: any = ""
   responseText = ""
   responseImage = ""
-  resultResponse = 0
   validate = true
+
+  resultResponse = 0
+  actionHit = 0
+  omissionHit = 0
+  omissionError = 0
+  actionError = 0
+
+  objectDataExam = {
+    resultResponse: 0,
+    omissionHit: 0,
+    actionHit: 0,
+    omissionError: 0,
+    actionError: 0
+  }
 
   currentDate = new Date()
   day = this.currentDate.getDate().toString().padStart(2, '0')
@@ -75,9 +83,11 @@ randomObjectCreate() {
   var stage = document.getElementById('stage')
 		if(imgs.length > 0){
 			if (imgs[0].id != "triangulo") {
-				this.omissionHit++;
-				console.log(this.omissionHit)
-			}
+				this.objectDataExam.omissionHit++
+				console.log(this.objectDataExam.omissionHit)
+			} else {
+        this.objectDataExam.omissionError++
+      }
 			stage?.removeChild(imgs[0])
 		}
 
@@ -109,9 +119,9 @@ randomObjectCreate() {
 }
 
 score() {
-  const scoreValue = ((this.actionHit + this.omissionHit) / this.totalObjects) * 100;
-  console.log(this.actionHit + ' ' + this.omissionHit + ' ' + scoreValue)
-  this.resultResponse = scoreValue
+  const scoreValue = ((this.objectDataExam.actionHit + this.objectDataExam.omissionHit) / this.totalObjects) * 100;
+  console.log(this.objectDataExam.actionHit + ' ' + this.objectDataExam.omissionHit + ' ' + scoreValue)
+  this.objectDataExam.resultResponse = scoreValue
   switch(true){
     case scoreValue >= 80:
       this.responseText = this.resultObject[0].responseText
@@ -148,41 +158,17 @@ score() {
       this.route.navigate(['/info'])
     })
    }
-   this.storeResultResponse(scoreValue)
+   this.storeResultResponse(this.objectDataExam)
 }
-
-// handleKeyEvent() {
-//   const triangle = document.getElementsByTagName('img')[0] ? document.getElementsByTagName('img')[0] : null;
-//   if(this.currentWidth > 600) {
-//     this.renderer.listen('document', 'keydown.space', (event) => {
-//       if (event.code === "Space" && triangle) {
-//         if (triangle.id === "triangulo") {
-//           this.actionHit++;
-//         }
-//         triangle.remove();
-//       }
-//   });
-//   } else {
-//     const stage = document.getElementById('stage') as HTMLDivElement
-//     stage.addEventListener('click', () => {
-//       if (triangle) {
-//         if (triangle.id === "triangulo") {
-//           this.actionHit++;
-//         }
-//         triangle.remove();
-//       }
-//     } )
-//   }
-// }
-
-
 
 @HostListener('document:keydown.space', ['$event'])
 handleSpaceKey(event: KeyboardEvent): void {
   const triangle = document.getElementsByClassName('triangulo')[0] ? document.getElementsByClassName('triangulo')[0] : null;
   if(event.code === "Space" && triangle){
       if(triangle.id === "triangulo") {
-        this.actionHit++
+        this.objectDataExam.actionHit++
+      } else {
+        this.objectDataExam.actionError++
       }
       triangle.remove()
   }
@@ -193,7 +179,9 @@ handleClick(event: MouseEvent):void {
   const triangle = document.getElementsByClassName('triangulo')[0] ? document.getElementsByClassName('triangulo')[0] : null;
   if(event.button == 0 && triangle) {
     if(triangle.id === "triangulo") {
-      this.actionHit++
+      this.objectDataExam.actionHit++
+    } else {
+      this.objectDataExam.actionError++
     }
     triangle.remove()
 }
@@ -203,14 +191,13 @@ redirectInfo() {
   this.route.navigate(['/info'])
 }
 
-storeResultResponse(result: number){
-  this.data.setResultResponse(sessionStorage.getItem('id'), result).subscribe(
+storeResultResponse(objectResult: object){
+  this.data.setResultResponse(sessionStorage.getItem('id'), objectResult).subscribe(
     (response: any) => {
       console.log(response)
     }
   )           
 }
-
 
 validExecution() {
   this.data.getValidExecutation(this.todayDate, sessionStorage.getItem('id')).subscribe(
@@ -262,7 +249,6 @@ validExecution() {
 ngOnInit(): void {
   this.resize()
   this.validExecution()
-  // this.handleKeyEvent()
 }
 
 ngOnDestroy(): void {

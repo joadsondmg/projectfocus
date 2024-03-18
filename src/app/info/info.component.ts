@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
 import { UserdataService } from '../userdata.service';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-info',
