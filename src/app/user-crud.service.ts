@@ -34,6 +34,8 @@ export class UserCrudService {
   }
 
   validFirstAcces(objectUser: any): Observable<any>{
-    return this.http.post<any>(this.apiGetUser, objectUser)
+    return this.http.post<any>(this.apiGetUser, objectUser).pipe(
+      map(data => data.result)
+    )
   }
 }

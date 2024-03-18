@@ -107,8 +107,7 @@ checkFirstLogin() {
   }
   this.crud.validFirstAcces(objectUser).subscribe(
     (response) => {
-      const userData = response.results
-      if(userData[0].access == 0) {
+      if(response.access == 0) {
         this.firstAcessControl = true
       }
     }

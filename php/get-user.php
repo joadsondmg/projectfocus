@@ -13,7 +13,7 @@ if($exec) {
     while ($row = mysqli_fetch_assoc($exec)) {
         $result[] = $row;
     }
-    echo json_encode(['status' => 'success',  'results' => $result]);
+    echo json_encode(['status' => 'success',  'result' => $result[0]]);
 } else {
     echo json_encode(['status' => 'fail', 'erro' => mysqli_error($connection)]);
 }
