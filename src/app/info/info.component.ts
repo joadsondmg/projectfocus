@@ -68,11 +68,11 @@ getUserData() {
             this.username = firstName + " " + lastName
             sessionStorage.setItem('role', userData.role)
             sessionStorage.setItem('id', userData.sub)
+            this.checkFirstLogin()
           }
         }
     )
   }
-  this.checkFirstLogin()
 }
 
 passUpdate() {
