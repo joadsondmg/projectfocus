@@ -18,6 +18,14 @@ export class AdminComponent {
     role: ""
   }
 
+  passChanger = false
+  defaultPass = 'vale2024'
+
+  setDefaultPass() {
+    this.passChanger = !this.passChanger
+    this.objectUser.password = this.defaultPass
+  }
+
   setUserInput() {
     const name = this.objectUser.name
     const objectName = name.split(' ')
