@@ -13,6 +13,7 @@ $password = $data['password'];
 
 $sql = "SELECT * FROM users WHERE user='$user'";
 $result = mysqli_query($connection, $sql);
+$user = mysqli_fetch_assoc($result);
 
 if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
     $tokenPayload = [
