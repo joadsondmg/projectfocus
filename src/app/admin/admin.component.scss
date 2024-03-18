@@ -53,11 +53,17 @@
         outline: none;
         padding-left: 1rem;
     }
-    input[type=checkbox] {
-        width: 20% !important;
+    select {
+        width: 100%;
         outline: none;
     }
 }
+.passfield {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
 
 
 
