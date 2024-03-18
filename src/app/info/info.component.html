@@ -28,6 +28,7 @@
                 <div class="input-content">
                     <label for="repeat_password">Confirme sua senha:</label>
                     <input type="password" id="repeat_password" placeholder="Digite novamente sua senha" (keyup.enter)="passUpdate()">
+                    <img src="./assets/eye_on.png" id="show-pass" alt="" (click)="showPassword()">
                 </div>
                 <button (click)="passUpdate()">Alterar senha</button>
             </div>

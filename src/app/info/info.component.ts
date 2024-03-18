@@ -114,6 +114,20 @@ checkFirstLogin() {
     }
   )
 }
+showPassword() {
+  const password = document.getElementById('password') as HTMLInputElement
+  const repeat_password = document.getElementById('repeat_password') as HTMLInputElement
+  const eyeImg = document.getElementById('show-pass') as HTMLImageElement
+  if(password.type === "text"){
+    password.type = "password"
+    repeat_password.type = "password"
+    eyeImg.src = "./assets/eye_on.png"
+  } else {
+    password.type = "text"
+    repeat_password.type = "text"
+    eyeImg.src = "./assets/eye_off.png"
+  }
+}
 
 ngOnInit(): void {
   this.generateCurrentObject()
