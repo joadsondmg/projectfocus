@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from '../userdata.service';
 import { UserCrudService } from '../user-crud.service';
+import { Observable, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-info',
@@ -55,22 +56,24 @@ generateCurrentObject() {
   randomImg.style.transform = this.currentObject.rotate
 }
 
-getUserData() {
-  const storedToken = sessionStorage.getItem('access-token')
-  if(storedToken){
-    this.data.getUserData(storedToken).subscribe(
-      (response) => {
-        const userData = response.data
-        if(userData){
-            const fullName = userData.name.split(" ")
-            const firstName = fullName[0]
-            const lastName = fullName[fullName.length - 1]
-            this.username = firstName + " " + lastName
-            sessionStorage.setItem('role', userData.role)
-            sessionStorage.setItem('id', userData.sub)
-          }
+getUserData(): Observable<any> {
+  const storedToken = sessionStorage.getItem('access-token');
+  if (storedToken) {
+    return this.data.getUserData(storedToken).pipe(
+      map((response) => {
+        const userData = response.data;
+        if (userData) {
+          const fullName = userData.name.split(" ");
+          const firstName = fullName[0];
+          const lastName = fullName[fullName.length - 1];
+          this.username = firstName + " " + lastName;
+          sessionStorage.setItem('role', userData.role);
+          sessionStorage.setItem('id', userData.sub);
         }
-    )
+      })
+    );
+  } else {
+    return of(null); // Retorna um Observable vazio se não houver token armazenado
   }
 }
 
@@ -101,22 +104,25 @@ passUpdate() {
   }
 }
 
-checkFirstLogin() {
+checkFirstLogin(): Observable<any> {
   const objectUser = {
     'id': sessionStorage.getItem('id')
-  }
-  this.crud.validFirstAcces(objectUser).subscribe(
-    (response) => {
-      if(response.access == 0) {
-        this.firstAcessControl = true
+  };
+  return this.crud.validFirstAcces(objectUser).pipe(
+    map((response) => {
+      if (response.access == 0) {
+        this.firstAcessControl = true;
       }
-    }
-  )
+    })
+  );
 }
 
 ngOnInit(): void {
   this.generateCurrentObject()
   this.getUserData()
+    .pipe(
+      switchMap(() => this.checkFirstLogin())
+    )
   this.infoLoader()
   this.checkFirstLogin()
 }
