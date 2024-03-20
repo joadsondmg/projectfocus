@@ -98,7 +98,7 @@ export class AnalysisComponent implements OnInit {
     this.data.countResults(this.date).subscribe(
       (response) => {
         if(response.status === 'success'){
-          this.counter = Math.round(response.amount/5)
+          this.counter = Math.ceil(response.amount/5)
       } else {
         alert('Erro ao quantificar resultados')
       }
