@@ -35,7 +35,9 @@ export class ExameComponent implements OnInit, OnDestroy{
     omissionHit: 0,
     actionHit: 0,
     omissionError: 0,
-    actionError: 0
+    actionError: 0,
+    time: "",
+    date: ""
   }
 
   currentDate = new Date()
@@ -43,6 +45,11 @@ export class ExameComponent implements OnInit, OnDestroy{
   month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
   year = this.currentDate.getFullYear()
   todayDate = this.day + "/" + this.month + "/" + this.year;
+
+  currentTime =  new Date();
+  hour = this.currentTime.getHours().toString().padStart(2,'0');
+  minutes = this.currentTime.getMinutes().toString().padStart(2,"0");
+  todayTime = this.hour + ":" + this.minutes;
 
   orientation = ['rotate(90deg)', 'rotate(270deg)'];
   fill = ['/triangulo_vazado.png', '/triangulo.png']
@@ -120,8 +127,10 @@ randomObjectCreate() {
 
 score() {
   const scoreValue = ((this.objectDataExam.actionHit + this.objectDataExam.omissionHit) / this.totalObjects) * 100;
-  console.log(this.objectDataExam.actionHit + ' ' + this.objectDataExam.omissionHit + ' ' + scoreValue)
+  // console.log(this.objectDataExam.actionHit + ' ' + this.objectDataExam.omissionHit + ' ' + scoreValue)
   this.objectDataExam.resultResponse = scoreValue
+  this.objectDataExam.date = this.todayDate
+  this.objectDataExam.time = this.todayTime
   switch(true){
     case scoreValue >= 80:
       this.responseText = this.resultObject[0].responseText
@@ -158,7 +167,7 @@ score() {
       this.route.navigate(['/info'])
     })
    }
-   this.storeResultResponse(this.objectDataExam)
+   this.storeResultResponse()
 }
 
 @HostListener('document:keydown.space', ['$event'])
@@ -191,8 +200,8 @@ redirectInfo() {
   this.route.navigate(['/info'])
 }
 
-storeResultResponse(objectResult: object){
-  this.data.setResultResponse(sessionStorage.getItem('id'), objectResult).subscribe(
+storeResultResponse(){
+  this.data.setResultResponse(sessionStorage.getItem('id'), this.objectDataExam).subscribe(
     (response: any) => {
       console.log(response)
     }

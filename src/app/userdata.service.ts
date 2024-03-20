@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { objectEach } from 'highcharts';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class UserdataService {
   // apiGetUser = 'http://localhost/projectfocus/php/user-data.php'
   // apiGetResult = 'http://localhost/projectfocus/php/valid-exec.php'
   // apiGetAllResult = 'http://localhost/projectfocus/php/get-results.php'
-  // apiSet = 'http://localhost/projectfocus/php/set-result.php'
+  // apiSetResult = 'http://localhost/projectfocus/php/set-result.php'
   // apiFilterResult = 'http://localhost/projectfocus/php/filter-result.php'
   // apiCountResult = 'http://localhost/projectfocus/php/count-result.php'
   
@@ -24,7 +25,7 @@ export class UserdataService {
   apiGetUser = 'https://backofficecheck.com.br/focus/php/user-data.php'
   apiGetResult = 'https://backofficecheck.com.br/focus/php/valid-exec.php'
   apiGetAllResult = 'https://backofficecheck.com.br/focus/php/get-results.php'
-  apiSet = 'https://backofficecheck.com.br/focus/php/set-result.php'
+  apiSetResult = 'https://backofficecheck.com.br/focus/php/set-result.php'
   apiFilterResult = 'https://backofficecheck.com.br/focus/php/filter-result.php'
   apiCountResult = 'https://backofficecheck.com.br/focus/php/count-result.php'
   
@@ -36,19 +37,15 @@ export class UserdataService {
   }
 
   setResultResponse(id: any, objectResult: any): Observable<any>{
-    const currentDate = new Date()
-    const day = currentDate.getDate().toString().padStart(2, '0')
-    const month = (currentDate.getMonth()+1).toString().padStart(2, '0')
-    const year = currentDate.getFullYear()
-    const todayDate = day + "/" + month + "/" + year;
     const data = { 
       'id_user' : id,
       'result': objectResult.resultResponse,
       'o_error': objectResult.omissionError,
       'a_error': objectResult.actionError,
-      'date': todayDate
+      'time': objectResult.time,
+      'date': objectResult.date
     };
-    return this.http.post(this.apiSet, data)
+    return this.http.post(this.apiSetResult, data)
   }
 
   getValidExecutation(date: any, id_user: any): Observable<any> {

@@ -4,13 +4,15 @@ include ('connection.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $id_user = $data['id_user'];
 $date = $data['date'];
+$time = $time['time'];
 $result = $data['result'];
 $o_error = $data['o_error'];
 $a_error = $data['a_error'];
 
-$sql = "INSERT INTO results (id_user, date, result, o_error, a_error) VALUES (
+$sql = "INSERT INTO results (id_user, date, time, result, o_error, a_error) VALUES (
     '$id_user',
     '$date',
+    '$time',
     '$result',
     '$o_error',
     '$a_error'
