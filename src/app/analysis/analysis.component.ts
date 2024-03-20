@@ -70,6 +70,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   getResults(): any {
+    this.resultGraph = []
     const canvas = document.getElementById('dash') as HTMLCanvasElement
     const canvasContainer = document.getElementById('dash-content')
     if(canvas){
