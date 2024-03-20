@@ -33,7 +33,13 @@ export class AdminComponent {
 
   setUserInput() {
     let name = this.objectUser.name
-    name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+    name.replace(/[áàãâä]/gi, "a")
+    .replace(/[éèêë]/gi, "e")
+    .replace(/[íìîï]/gi, "i")
+    .replace(/[óòõôö]/gi, "o")
+    .replace(/[úùûü]/gi, "u")
+    .replace(/[ç]/gi, "c")
+    .replace(/[^a-zA-Z0-9\s]/g, "");
     console.log(name)
     const objectName = name.split(' ')
     if(name != "") {
