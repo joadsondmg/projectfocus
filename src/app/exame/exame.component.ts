@@ -44,11 +44,9 @@ export class ExameComponent implements OnInit, OnDestroy{
   day = this.currentDate.getDate().toString().padStart(2, '0')
   month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
   year = this.currentDate.getFullYear()
+  hour = this.currentDate.getHours().toString().padStart(2,'0');
+  minutes = this.currentDate.getMinutes().toString().padStart(2,"0");
   todayDate = this.day + "/" + this.month + "/" + this.year;
-
-  currentTime =  new Date();
-  hour = this.currentTime.getHours().toString().padStart(2,'0');
-  minutes = this.currentTime.getMinutes().toString().padStart(2,"0");
   todayTime = this.hour + ":" + this.minutes;
 
   orientation = ['rotate(90deg)', 'rotate(270deg)'];
@@ -91,7 +89,6 @@ randomObjectCreate() {
 		if(imgs.length > 0){
 			if (imgs[0].id != "triangulo") {
 				this.objectDataExam.omissionHit++
-				console.log(this.objectDataExam.omissionHit)
 			} else {
         this.objectDataExam.omissionError++
       }
@@ -117,9 +114,6 @@ randomObjectCreate() {
 			triangle.style.position = 'relative'
 			triangle.style.left = positionX + 'px'
 			triangle.style.top = positionY + 'px'
-			// console.log(fill[selectFill] + ' ' + this.currentObject.fill + ' ' + rotate + ' ' + this.currentObject.rotate)
-      console.log(positionX + ' ' + positionY)
-
 			stage?.appendChild(triangle);
 		}
 		this.countObjects++;
