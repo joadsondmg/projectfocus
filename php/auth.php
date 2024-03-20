@@ -21,7 +21,8 @@ if ($result->num_rows > 0 && password_verify($password, $user['password'])) {
         'sub' => $user['id'],
         'user' => $user['user'],
         'name' => $user['name'],
-        'role' => $user['role']
+        'role' => $user['role'],
+        'access' => $user['access']
     ];
     $token = JWT::encode($tokenPayload, $secret_key, 'HS256');
     echo json_encode(['status' => 'success', 'token' => $token]);

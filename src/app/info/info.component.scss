@@ -1,44 +1,10 @@
 .main-container {
     width: 100vw;
-    height: 100vh;
+    height:100vh;
     display: grid;
     grid-template-rows: 0.1fr 1fr 0.1fr;
     place-items: center;
 }
-// .header {
-//     width: 100%;
-//     padding: 1rem 2rem;
-//     display: flex;
-//     justify-content: space-between;
-//     img {
-//     width: 5rem;
-//     }
-//     img:nth-child(2){
-//         width: 6rem;
-//     }
-// }
-// .action {
-//     width: 4.5rem;
-//     img {
-//         width: 1.5rem;
-//         cursor: pointer;
-//     }
-// }
-// .dropdown {
-//     list-style-type: none;
-//     position: absolute;
-//     top: 3rem;
-//     right: 3rem;
-//     li{
-//         padding: 0.5rem 2rem;
-//         background-color: #bbbcc2;
-//         border-radius: 0.2rem;
-//         &:hover {
-//             background-color: var(--background-color);
-//             color: var(--default-text-color);
-//         }
-//     }
-// }
 .info-container {
     width: 90%;
     height: 90%;
@@ -99,7 +65,73 @@
         }
     }
 }
+.first-access-panel {
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(182, 181, 181, 0.733);
+    display: grid;
+    place-items: center;
+}
+.pass-container {
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    height: 50%;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    h3 {
+        color: var(--background-color);
+    }
+}
+.input-container {
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    button {
+        width: 50%;
+        background-color: var(--background-color);
+        border: none;
+        border-radius: 0.2rem;
+        color: var(--default-text-color);
+        padding: 0.5rem 0;
+        margin-top: 1rem;
+        &:hover {
+            background-color: var(--background-color-hover);
+        }
+    }
+}
+.input-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    input {
+        border: none;
+        outline: none;
+        background-color: #e4e6e8;
+        padding: 0.2rem 0 0.2rem 1rem;
+    }
+    img {
+        width: 1.5rem;
+        position: relative;
+        bottom: 1.6rem;
+        left: 90%;
+        cursor: pointer;
+    }
+}
 @media screen and (max-width: 600px) {
+    .main-container {
+        height: 100%;
+    }
+    .first-access-panel {
+        height: 180%;
+    }
     .info-container {
         width: 90%;
         height: 100%;
@@ -117,4 +149,16 @@
     .action {
         width: 2rem;
     }
+    .pass-container {
+        width: 90%;
+        height: 60%;
+        h3 {
+            width: 80%;
+        }
+    }
+    .input-container {
+        width: 80%
+    }
+    
+
 }
