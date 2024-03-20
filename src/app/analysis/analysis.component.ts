@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserdataService } from '../userdata.service';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js/auto';
+import { format } from 'highcharts';
 
 @Component({
   selector: 'app-analysis',
@@ -25,7 +26,8 @@ export class AnalysisComponent implements OnInit {
   day = this.currentDate.getDate().toString().padStart(2, '0')
   month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
   year = this.currentDate.getFullYear()
-  date = this.day + "/" + this.month + "/" + this.year;
+  dateI = this.day + "/" + this.month + "/" + this.year;
+  dateF = this.dateI
 
   counter = 0
 
@@ -38,27 +40,45 @@ export class AnalysisComponent implements OnInit {
 }
 
   filterData(){
-    const input = document.getElementById('date') as HTMLInputElement
-    if(input.value == ""){
+    const inputDateStart = document.getElementById('date_start') as HTMLInputElement
+    const inputDateFinal = document.getElementById('date_final') as HTMLInputElement
+    
+    if(inputDateStart.value == ""){
       alert('Insira uma data para aplicar o filtro')
+    } else if(inputDateFinal.value != "" && inputDateStart.value > inputDateFinal.value){
+      alert('A data inicial não pode ser maior que a data final')
     } else {
-      let inputDate = this.formatDate(input.value)
-      if(inputDate != this.date){
-        this.date = inputDate
+      let dateStart = inputDateStart.value
+      let dateEnd = inputDateFinal.value
+
+      if(dateStart){
+        dateStart = this.formatDate(dateStart)
+      } else {
+        dateStart = this.dateI
+      }
+      if(dateEnd) {
+        dateEnd = this.formatDate(dateEnd)
+      } else {
+        dateEnd = dateStart
+      }
+
+      if(dateStart == this.dateI && dateEnd == "") {
+        alert('Filtro já aplicado')
+      } else {
+        this.dateI = dateStart
+        this.dateF = dateEnd
         this.page = 1
         this.countResult()
-        console.log(this.date)
         this.getResults()
         this.getFilterResult()
-      } else {
-        alert('Filtro já aplicado')
+        this.dateF = ""
       }
-      
     }
+    
   }
 
   getFilterResult() {
-    this.data.getFilteredResults(this.date, this.page).subscribe(
+    this.data.getFilteredResults(this.dateI, this.dateF, this.page).subscribe(
       (response) => {
         if(response.status === "success") {
           this.filteredResults = response.results;
@@ -81,7 +101,7 @@ export class AnalysisComponent implements OnInit {
     currentCanvas.classList.add('dash')
     canvasContainer?.appendChild(currentCanvas)
 
-    this.data.getAllResults(this.date).subscribe(
+    this.data.getAllResults(this.dateI,this.dateF).subscribe(
       (response: any) => {
         if(response.status === 'success'){
           response.results.forEach((item: any) => {
@@ -96,7 +116,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   countResult() {
-    this.data.countResults(this.date).subscribe(
+    this.data.countResults(this.dateI, this.dateF).subscribe(
       (response) => {
         if(response.status === 'success'){
           this.counter = Math.ceil(response.amount/5)

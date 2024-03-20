@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { objectEach } from 'highcharts';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -56,24 +55,27 @@ export class UserdataService {
     return this.http.post(this.apiGetResult, data)
   }
 
-  getAllResults(date: any): Observable<any> {
+  getAllResults(dateI: any, dateF: any): Observable<any> {
     const data = {
-      'date' : date
+      'date_i' : dateI,
+      'date_f' : dateF
     }
     return this.http.post(this.apiGetAllResult, data)
   }
 
-  getFilteredResults(date: any, page: any): Observable<any>{
+  getFilteredResults(dateI: any, dateF: any, page: any): Observable<any>{
     const data = {
-      'date' : date,
+      'date_i' : dateI,
+      'date_f' : dateF,
       'page' :  page
     }
     return this.http.post(this.apiFilterResult, data)
   }
 
-  countResults(date: any): Observable<any> {
+  countResults(dateI: any, dateF: any): Observable<any> {
     const data = {
-      'date' : date,
+      'date_i' : dateI,
+      'date_f' : dateF
     }
     return this.http.post(this.apiCountResult, data)
   }

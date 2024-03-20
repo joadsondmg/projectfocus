@@ -4,12 +4,13 @@ include ('connection.php');
 $itemsPerPage = 5;
 
 $data = json_decode(file_get_contents('php://input'), true);
-$date = $data['date'];
+$date_i = $data['date_i'];
+$date_f = $data['date_f'];
 $page = intval($data['page']);
-
+$sql = "";
 $offset = ($page - 1) * $itemsPerPage;
 
-$sql = "SELECT * FROM results WHERE date = '$date' LIMIT $itemsPerPage OFFSET $offset";
+$sql = "SELECT * FROM results WHERE date BETWEEN '$date_i' AND '$date_f' LIMIT $itemsPerPage OFFSET $offset";
 
 $exec = mysqli_query($connection, $sql);
 if($exec) {

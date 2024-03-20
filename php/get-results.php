@@ -2,9 +2,11 @@
 include ('connection.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
-$date = $data['date'];
+$date_i = $data['date_i'];
+$date_f = $data['date_f'];
+$sql = "";
 
-$sql = "SELECT * FROM results WHERE date = '$date'";
+$sql = "SELECT * FROM results WHERE date BETWEEN '$date_i' AND '$date_f'";
 
 $exec = mysqli_query($connection, $sql);
 if($exec) {

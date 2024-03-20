@@ -4,8 +4,12 @@
         <div class="table-container">
             <div class="filter">
                 <div class="input-container">
-                    <label for="date">Data:</label>
-                    <input type="date" id="date">
+                    <label for="date_start">Data Incial:</label>
+                    <input type="date" id="date_start">
+                </div>
+                <div class="input-container">
+                    <label for="date_final">Data Final:</label>
+                    <input type="date" id="date_final">
                 </div>
                 <button (click)="filterData()">Filtrar</button>
             </div>
