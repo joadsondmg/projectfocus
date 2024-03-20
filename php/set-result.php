@@ -20,7 +20,7 @@ $sql = "INSERT INTO results (id_user, date, time, result, o_error, a_error) VALU
 
 $exec = mysqli_query($connection, $sql);
 if($exec) {
-    echo json_encode(['status' => 'success', 'message' => 'Resultado  registrado correctamente', "sql" => $sql]);
+    echo json_encode(['status' => 'success', 'message' => 'Resultado  registrado correctamente']);
 } else {
     echo json_encode(['status' => 'fail', 'erro' => mysqli_error($connection)]);
 }
