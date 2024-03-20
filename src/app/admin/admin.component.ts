@@ -32,7 +32,8 @@ export class AdminComponent {
   }
 
   setUserInput() {
-    const name = this.objectUser.name
+    let name = this.objectUser.name
+    name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const objectName = name.split(' ')
     if(name != "") {
       this.objectUser.user = (objectName[0] + "." + objectName[objectName.length - 1]).toLowerCase()
