@@ -142,9 +142,9 @@ export class AnalysisComponent implements OnInit {
 
     // Define as cores com base nas contagens
     this.donutChartColors = [
-      'rgb(242, 226, 5)',
-      'rgb(46, 32, 80)',
-      'rgb(16, 23, 38)'
+      'rgb(196, 34, 34)', // Medicina
+      'rgb(236, 177, 31)', // Supervisor
+      'rgb(0, 126, 122)'  // Liberados
     ];
 
     // Cria o gráfico de donut

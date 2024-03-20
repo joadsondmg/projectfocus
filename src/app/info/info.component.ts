@@ -23,7 +23,7 @@ firstAcessControl = false
 fill = ['/triangulo_vazado.png', '/triangulo.png']
 rotate = ['rotate(90deg)', 'rotate(270deg)']
 
-infoClick = ['barra de espaço do teclado', 'tela do celular']
+infoClick = ['na barra de espaço do teclado', ' em qualquer parte da tela do celular']
 
 currentWidth = window.innerWidth
 
