@@ -61,9 +61,6 @@ export class AnalysisComponent implements OnInit {
       } else {
         dateEnd = dateStart
       }
-      if(this.dateF == "") {
-        this.dateF == this.dateI
-      }
 
       if(dateStart == this.dateI && dateEnd == "") {
         alert('Filtro já aplicado')
@@ -74,7 +71,6 @@ export class AnalysisComponent implements OnInit {
         this.countResult()
         this.getResults()
         this.getFilterResult()
-        this.dateF = ""
       }
     }
     
