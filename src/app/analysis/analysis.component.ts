@@ -42,7 +42,7 @@ export class AnalysisComponent implements OnInit {
   filterData(){
     const inputDateStart = document.getElementById('date_start') as HTMLInputElement
     const inputDateFinal = document.getElementById('date_final') as HTMLInputElement
-    
+
     if(inputDateStart.value == ""){
       alert('Insira uma data para aplicar o filtro')
     } else if(inputDateFinal.value != "" && inputDateStart.value > inputDateFinal.value){
@@ -51,27 +51,43 @@ export class AnalysisComponent implements OnInit {
       let dateStart = inputDateStart.value
       let dateEnd = inputDateFinal.value
 
-      if(dateStart){
-        dateStart = this.formatDate(dateStart)
+      if(!dateStart && !dateEnd) {
+        this.dateI = ""
+        this.dateF = ""
       } else {
-        dateStart = this.dateI
+        if(!dateStart &&  dateEnd) {
+          alert('Insira a data inicial para aplicar o filtro!')
+        } else {
+          if(dateStart && dateEnd) {
+            this.dateI = this.formatDate(dateStart)
+            this.dateF = this.formatDate(dateEnd)
+          } else {
+            this.dateI = this.formatDate(dateStart)
+            this.dateF = this.formatDate(dateStart)
+          }
+        }
       }
-      if(dateEnd) {
-        dateEnd = this.formatDate(dateEnd)
-      } else {
-        dateEnd = dateStart
-      }
-
-      if(dateStart == this.dateI && dateEnd == "") {
-        alert('Filtro já aplicado')
-      } else {
-        this.dateI = dateStart
-        this.dateF = dateEnd
         this.page = 1
         this.countResult()
         this.getResults()
         this.getFilterResult()
-      }
+
+      // if(dateStart){
+      //   dateStart = this.formatDate(dateStart)
+      // }
+      // if(dateEnd) {
+      //   dateEnd = this.formatDate(dateEnd)
+      // } else if(dateStart && ){
+      //   dateEnd = dateStart
+      // }
+
+      // if(dateStart == this.dateI && dateEnd == "") {
+      //   alert('Filtro já aplicado')
+      // } else {
+      //   this.dateI = dateStart
+      //   this.dateF = dateEnd
+
+      // }
     }
     
   }
