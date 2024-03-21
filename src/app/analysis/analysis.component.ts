@@ -59,7 +59,7 @@ export class AnalysisComponent implements OnInit {
       if(dateEnd) {
         dateEnd = this.formatDate(dateEnd)
       } else {
-        dateEnd = dateStart
+        dateEnd = this.dateI
       }
 
       if(dateStart == this.dateI && dateEnd == "") {
