@@ -26,8 +26,8 @@ export class AnalysisComponent implements OnInit {
   day = this.currentDate.getDate().toString().padStart(2, '0')
   month = (this.currentDate.getMonth()+1).toString().padStart(2, '0')
   year = this.currentDate.getFullYear()
-  dateI = this.day + "/" + this.month + "/" + this.year;
-  dateF = this.day + "/" + this.month + "/" + this.year;
+  dateI = ""
+  dateF = ""
 
   counter = 0
 
