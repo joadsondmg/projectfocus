@@ -28,7 +28,9 @@
                                     <div class="row-data">
                                         <div>{{item.id_user}}</div>
                                         <div>{{item.result}}%</div>
-                                        <div><span [ngClass]="{'background-green': item.result >= 80, 'background-red': item.result < 80}" >{{item.result >= 80 ? "SIM" : "NÃO"}}</span></div>
+                                        <div><span [ngClass]="{'background-red': item.result < 60,
+                                            'background-yellow': item.result >= 60 && item.result < 80,
+                                            'background-green': item.result >= 80}" >{{item.result >= 80 ? "SIM" : "NÃO"}}</span></div>
                                     </div>
                                 </div>
                             </div>
