@@ -1,7 +1,7 @@
 <?php
 include ('connection.php');
 
-$itemsPerPage = 5;
+$itemsPerPage = 10;
 
 $data = json_decode(file_get_contents('php://input'), true);
 $date_i = $data['date_i'];
