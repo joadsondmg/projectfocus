@@ -180,7 +180,7 @@ export class AnalysisComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if(window.innerWidth < 1500) {
+    if(window.innerWidth < 1650) {
       this.itemsPerPage = 5
     } else {
       this.itemsPerPage = 10
