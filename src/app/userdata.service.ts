@@ -63,11 +63,12 @@ export class UserdataService {
     return this.http.post(this.apiGetAllResult, data)
   }
 
-  getFilteredResults(dateI: any, dateF: any, page: any): Observable<any>{
+  getFilteredResults(dateI: any, dateF: any, page: any, itemsPerPage: any): Observable<any>{
     const data = {
       'date_i' : dateI,
       'date_f' : dateF,
-      'page' :  page
+      'page' :  page,
+      'itemsPerPage': itemsPerPage
     }
     return this.http.post(this.apiFilterResult, data)
   }
