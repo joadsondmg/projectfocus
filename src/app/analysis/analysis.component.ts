@@ -29,7 +29,9 @@ export class AnalysisComponent implements OnInit {
   dateI = ""
   dateF = ""
 
-  counter = 0
+  counter = 0 
+
+  itemsPerPage = 0
 
   formatDate(date: string): string {
     const objectDate = date.split('-');
@@ -71,29 +73,12 @@ export class AnalysisComponent implements OnInit {
         this.countResult()
         this.getResults()
         this.getFilterResult()
-
-      // if(dateStart){
-      //   dateStart = this.formatDate(dateStart)
-      // }
-      // if(dateEnd) {
-      //   dateEnd = this.formatDate(dateEnd)
-      // } else if(dateStart && ){
-      //   dateEnd = dateStart
-      // }
-
-      // if(dateStart == this.dateI && dateEnd == "") {
-      //   alert('Filtro já aplicado')
-      // } else {
-      //   this.dateI = dateStart
-      //   this.dateF = dateEnd
-
-      // }
     }
     
   }
 
   getFilterResult() {
-    this.data.getFilteredResults(this.dateI, this.dateF, this.page).subscribe(
+    this.data.getFilteredResults(this.dateI, this.dateF, this.page, this.itemsPerPage).subscribe(
       (response) => {
         if(response.status === "success") {
           this.filteredResults = response.results;
@@ -134,7 +119,7 @@ export class AnalysisComponent implements OnInit {
     this.data.countResults(this.dateI, this.dateF).subscribe(
       (response) => {
         if(response.status === 'success'){
-          this.counter = Math.ceil(response.amount/10)
+          this.counter = Math.ceil(response.amount/this.itemsPerPage)
       } else {
         alert('Erro ao quantificar resultados')
       }
@@ -195,6 +180,11 @@ export class AnalysisComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    if(window.innerWidth < 1500) {
+      this.itemsPerPage = 5
+    } else {
+      this.itemsPerPage = 10
+    }
     this.countResult();
     this.getResults()
     this.getFilterResult()

@@ -1,12 +1,14 @@
 <?php
 include ('connection.php');
 
-$itemsPerPage = 10;
+
 
 $data = json_decode(file_get_contents('php://input'), true);
 $date_i = $data['date_i'];
 $date_f = $data['date_f'];
+$itemsPerPage = $data['itemsPerPage'];
 $page = intval($data['page']);
+
 $offset = ($page - 1) * $itemsPerPage;
 $sql = "";
 
