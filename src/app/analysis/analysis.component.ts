@@ -82,6 +82,7 @@ export class AnalysisComponent implements OnInit {
       (response) => {
         if(response.status === "success") {
           this.filteredResults = response.results;
+          console.log(this.filteredResults);
         } else {
           alert('Erro ao buscar resultados filtrados')
         }
