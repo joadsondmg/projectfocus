@@ -12,14 +12,14 @@ export class UserCrudService {
   ) { }
 
   // Local Connection
-  apiCreateUser = 'http://localhost/projectfocus/php/create-user.php'
-  apiUpdateUser = 'http://localhost/projectfocus/php/update-user.php'
-  apiGetUser = 'http://localhost/projectfocus/php/get-user.php'
+  // apiCreateUser = 'http://localhost/projectfocus/php/create-user.php'
+  // apiUpdateUser = 'http://localhost/projectfocus/php/update-user.php'
+  // apiGetUser = 'http://localhost/projectfocus/php/get-user.php'
 
   // Hosp Connection
-  // apiCreateUser = 'https://backofficecheck.com.br/focus/php/create-user.php'
-  // apiUpdateUser = 'https://backofficecheck.com.br/focus/php/update-user.php'
-  // apiGetUser = 'https://backofficecheck.com.br/focus/php/get-user.php'
+  apiCreateUser = 'https://backofficecheck.com.br/focus/php/create-user.php'
+  apiUpdateUser = 'https://backofficecheck.com.br/focus/php/update-user.php'
+  apiGetUser = 'https://backofficecheck.com.br/focus/php/get-user.php'
 
   createUser(userData: object): Observable<any> {
     return this.http.post<any>(this.apiCreateUser, userData).pipe(
