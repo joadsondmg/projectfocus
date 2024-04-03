@@ -25,14 +25,20 @@ login() {
   const pass = document.getElementById('password') as HTMLInputElement
   if(user.value != "" && pass.value != "" ) {
     this.auth.login(this.userData).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         if(response) {
-          sessionStorage.setItem('access-token', response)
-          this.route.navigate(['/info'])
+          if(response.status == "success") {
+            sessionStorage.setItem('access-token', response)
+            this.route.navigate(['/info'])
+          } else {
+            alert('Usuário suspenso. Entre em contato com um administrador')
+            user.value = ""
+            pass.value = ""
+          }
         } else {
-          alert('Dados Incorretos')
-          pass.value = ""
-        }
+            alert('Dados Incorretos')
+            pass.value = ""
+          }
       }
     })
   } else {
