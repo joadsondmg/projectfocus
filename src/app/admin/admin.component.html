@@ -28,6 +28,18 @@
                         <option value="adm">Administrador</option>
                     </select>
                 </div>
+                <div class="input-container">
+                    <label for="sector">Setor:</label>
+                    <select name="sector" id="sector" [(ngModel)]="objectUser.sector">
+                        <option value="" disabled selected>Escolha uma Opção</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="ccs">CCS</option>
+                        <option value="supervisor">Supervisor / Inspetor</option>
+                        <option value="ambiental">Ambiental</option>
+                        <option value="backkoffice">Backoffice</option>
+                        <option value="analista">Analista</option>
+                    </select>
+                </div>
                 <button (click)="createUser()">Cadastrar</button>
             </div>
         </div>

@@ -15,7 +15,8 @@ export class AdminComponent {
     name: "",
     user: "",
     password: "",
-    role: ""
+    role: "",
+    sector: ""
   }
 
   passChanger = false
@@ -28,7 +29,6 @@ export class AdminComponent {
     } else {
       this.objectUser.password = ''
     }
-    
   }
 
   setUserInput() {
@@ -45,7 +45,7 @@ export class AdminComponent {
 
   createUser() {
     this.objectUser.name = this.objectUser.name.toUpperCase()
-    if(this.objectUser.name != "" && this.objectUser.password != "" && this.objectUser.role != "" ) {
+    if(this.objectUser.name != "" && this.objectUser.password != "" && this.objectUser.role != "" && this.objectUser.sector != "" ) {
       this.crud.createUser(this.objectUser).subscribe(
         (response) => {
           if(response === 'success') {

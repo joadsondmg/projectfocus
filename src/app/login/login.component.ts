@@ -28,7 +28,7 @@ login() {
       next: (response: any) => {
         if(response) {
           if(response.status == "success") {
-            sessionStorage.setItem('access-token', response)
+            sessionStorage.setItem('access-token', response.token)
             this.route.navigate(['/info'])
           } else {
             alert('Usuário suspenso. Entre em contato com um administrador')

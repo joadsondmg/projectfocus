@@ -21,7 +21,7 @@ export class AuthService {
 
   login(userData: object): Observable<string> {
     return this.http.post<any>(this.api, userData)
-  }
+    }
 
   logout() {
     sessionStorage.removeItem('access-token')
